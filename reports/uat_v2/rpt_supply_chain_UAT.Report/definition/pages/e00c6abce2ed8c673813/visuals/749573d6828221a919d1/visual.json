@@ -1,0 +1,114 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "749573d6828221a919d1",
+    "position": {
+        "x": 643.75,
+        "y": 818.75,
+        "z": 5000,
+        "height": 182.5,
+        "width": 630,
+        "tabOrder": 5000
+    },
+    "visual": {
+        "visualType": "clusteredColumnChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_carrier"
+                                        }
+                                    },
+                                    "Property": "Carrier Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_carrier.Carrier Name",
+                            "nativeQueryRef": "Carrier Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_shipment"
+                                        }
+                                    },
+                                    "Property": "Avg Dispatch Variance Hours"
+                                }
+                            },
+                            "queryRef": "gld_fact_shipment.Avg Dispatch Variance Hours",
+                            "nativeQueryRef": "Avg Dispatch Variance Hours"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Column": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_dim_carrier"
+                                    }
+                                },
+                                "Property": "Carrier Name"
+                            }
+                        },
+                        "direction": "Ascending"
+                    }
+                ]
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "radius": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "2D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

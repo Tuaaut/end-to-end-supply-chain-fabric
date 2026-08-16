@@ -1,0 +1,108 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "759810fcd700e1303014",
+    "position": {
+        "x": 359.24528301886795,
+        "y": 0,
+        "z": 0,
+        "height": 280,
+        "width": 280,
+        "tabOrder": 0
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_pipeline_run_log"
+                                        }
+                                    },
+                                    "Property": "Last Successful Pipeline Run"
+                                }
+                            },
+                            "queryRef": "ops_pipeline_run_log.Last Successful Pipeline Run",
+                            "nativeQueryRef": "Last Successful Pipeline Run"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "ops_pipeline_run_log"
+                                    }
+                                },
+                                "Property": "Last Successful Pipeline Run"
+                            }
+                        },
+                        "direction": "Ascending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 1,
+                                            "Percent": 0.6
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "5bfde2064b58e83107a0",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_pipeline_run_log"
+                            }
+                        },
+                        "Property": "Last Successful Pipeline Run"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

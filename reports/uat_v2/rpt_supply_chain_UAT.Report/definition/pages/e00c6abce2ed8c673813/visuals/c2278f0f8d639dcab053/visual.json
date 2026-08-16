@@ -1,0 +1,111 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "c2278f0f8d639dcab053",
+    "position": {
+        "x": 5,
+        "y": 568.75,
+        "z": 3000,
+        "height": 225,
+        "width": 1268.75,
+        "tabOrder": 3000
+    },
+    "visual": {
+        "visualType": "lineChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_date"
+                                        }
+                                    },
+                                    "Property": "Month Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_date.Month Name",
+                            "nativeQueryRef": "Month Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_demand_forecast"
+                                        }
+                                    },
+                                    "Property": "Forecast Qty"
+                                }
+                            },
+                            "queryRef": "gld_fact_demand_forecast.Forecast Qty",
+                            "nativeQueryRef": "Forecast Qty"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_demand_forecast"
+                                        }
+                                    },
+                                    "Property": "Actual Demand Qty"
+                                }
+                            },
+                            "queryRef": "gld_fact_demand_forecast.Actual Demand Qty",
+                            "nativeQueryRef": "Actual Demand Qty"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "radius": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "2D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

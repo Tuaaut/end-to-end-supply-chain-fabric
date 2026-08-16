@@ -1,0 +1,115 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "3d19a98b8575e7c924b7",
+    "position": {
+        "x": 8.571428571428571,
+        "y": 322.8571428571429,
+        "z": 3000,
+        "height": 202.85714285714286,
+        "width": 597.1428571428572,
+        "tabOrder": 3000
+    },
+    "visual": {
+        "visualType": "clusteredBarChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_location"
+                                        }
+                                    },
+                                    "Property": "Location Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_location.Location Name",
+                            "nativeQueryRef": "Location Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_inventory_snapshot"
+                                        }
+                                    },
+                                    "Property": "Low Stock Snapshot Count"
+                                }
+                            },
+                            "queryRef": "gld_fact_inventory_snapshot.Low Stock Snapshot Count",
+                            "nativeQueryRef": "Low Stock Snapshot Count"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_inventory_snapshot"
+                                    }
+                                },
+                                "Property": "Low Stock Snapshot Count"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "radius": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "2D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

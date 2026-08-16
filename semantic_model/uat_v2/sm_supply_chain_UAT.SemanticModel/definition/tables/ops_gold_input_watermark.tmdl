@@ -1,0 +1,24 @@
+table ops_gold_input_watermark
+	lineageTag: 1e736b94-6405-40d8-93e4-b7d915b60f11
+	sourceLineageTag: [dbo].[ops_gold_input_watermark]
+
+	column 'Process Name'
+		dataType: string
+		lineageTag: 332f3bda-c9c4-4cb4-9c7f-f07bdbedbc77
+		sourceLineageTag: process_name
+		summarizeBy: none
+		sourceColumn: process_name
+
+	column 'Silver Watermark'
+		dataType: dateTime
+		lineageTag: 2028b3a8-e4b8-4f9c-b2c1-06a39f95d80d
+		sourceLineageTag: silver_watermark
+		summarizeBy: none
+		sourceColumn: silver_watermark
+
+	partition ops_gold_input_watermark = entity
+		mode: directLake
+		source
+			entityName: ops_gold_input_watermark
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

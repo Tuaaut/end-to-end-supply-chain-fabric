@@ -1,0 +1,61 @@
+table gld_dim_carrier
+	lineageTag: d29f59f9-3610-42f3-a3e3-3a7cf6586b41
+	sourceLineageTag: [dbo].[gld_dim_carrier]
+
+	column 'Carrier ID'
+		dataType: string
+		lineageTag: 7fb04425-9e19-4769-85ad-5c92a6002472
+		sourceLineageTag: carrier_id
+		summarizeBy: none
+		sourceColumn: carrier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carrier Name'
+		dataType: string
+		lineageTag: 4386d250-4f27-4d11-8049-84c098a62b0c
+		sourceLineageTag: carrier_name
+		summarizeBy: none
+		sourceColumn: carrier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transport Mode'
+		dataType: string
+		lineageTag: 05396a59-1356-48f3-9c83-71ca0605a207
+		sourceLineageTag: transport_mode
+		summarizeBy: none
+		sourceColumn: transport_mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Base Rate THB per kg'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 8ace7228-ab6e-4e19-9530-db333e90885f
+		sourceLineageTag: base_rate_thb_per_kg
+		summarizeBy: none
+		sourceColumn: base_rate_thb_per_kg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Fuel Surcharge %'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f05c2214-8628-428a-b6ff-a1e6824bc4e9
+		sourceLineageTag: fuel_surcharge_pct
+		summarizeBy: none
+		sourceColumn: fuel_surcharge_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition gld_dim_carrier = entity
+		mode: directLake
+		source
+			entityName: gld_dim_carrier
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

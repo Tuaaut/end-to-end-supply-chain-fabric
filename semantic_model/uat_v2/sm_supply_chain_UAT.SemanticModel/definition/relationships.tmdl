@@ -1,0 +1,72 @@
+relationship 8c363128-532b-6d2d-b264-218d02e0f835
+	fromColumn: gld_fact_sales_order_line.'Product ID'
+	toColumn: gld_dim_product.'Product ID'
+
+relationship e83751f1-c1cf-0651-e9f8-a14a294068de
+	fromColumn: gld_fact_inventory_snapshot.'Product ID'
+	toColumn: gld_dim_product.'Product ID'
+
+relationship 388d7180-9183-7798-0317-fa87dcf45c96
+	fromColumn: gld_fact_demand_forecast.'Product ID'
+	toColumn: gld_dim_product.'Product ID'
+
+relationship 2bfd94aa-4a12-7277-0007-8d547bd6c3e7
+	fromColumn: gld_fact_purchase_receipt.'Product ID'
+	toColumn: gld_dim_product.'Product ID'
+
+relationship 895009da-15ad-1287-28ac-13e8dbbc76fe
+	fromColumn: gld_fact_sales_order_line.'Fulfillment Location ID'
+	toColumn: gld_dim_location.location_id
+
+relationship b3f83d4f-cf11-3dc8-250d-9483e3da2fab
+	fromColumn: gld_fact_inventory_snapshot.'Location ID'
+	toColumn: gld_dim_location.location_id
+
+relationship 0f38bc28-6a71-ffd2-655d-e781c9bc7434
+	fromColumn: gld_fact_demand_forecast.'Location ID'
+	toColumn: gld_dim_location.location_id
+
+relationship c5d4560a-126f-d949-e696-5225f7ff645e
+	fromColumn: gld_fact_purchase_receipt.'Location ID'
+	toColumn: gld_dim_location.location_id
+
+relationship 217a74e6-2252-9218-735f-c6c85c83cdf1
+	fromColumn: gld_fact_sales_order_line.'Customer ID'
+	toColumn: gld_dim_customer.'Customer ID'
+
+relationship 3fec83c5-3510-434e-28dc-4991a696ba59
+	fromColumn: gld_fact_shipment.'Customer ID'
+	toColumn: gld_dim_customer.'Customer ID'
+
+relationship 9cc5e99d-7b88-0df1-c38f-2ac8fe0a709e
+	fromColumn: gld_fact_shipment.'Carrier ID'
+	toColumn: gld_dim_carrier.'Carrier ID'
+
+relationship 2c9bb580-cc0a-338c-ecf8-bf2828da594c
+	fromColumn: gld_fact_shipment.'Route ID'
+	toColumn: gld_dim_route.'Route ID'
+
+relationship 4965f6c4-67cb-005a-4687-0b16fea278d0
+	fromColumn: gld_fact_purchase_receipt.'Supplier ID'
+	toColumn: gld_dim_supplier.'Supplier ID'
+
+relationship 187eacad-ec52-b285-89c7-ce19e75036a4
+	fromColumn: gld_fact_demand_forecast.'Demand Date'
+	toColumn: gld_dim_date.'Date Key'
+
+relationship cab0433a-a7c2-6173-c4ee-06694eb09d06
+	fromColumn: gld_fact_inventory_snapshot.'Snapshot Date'
+	toColumn: gld_dim_date.'Date Key'
+
+relationship f55c85fb-3840-2f48-24c0-738776c85773
+	fromColumn: gld_fact_sales_order_line.'Requested Delivery Date'
+	toColumn: gld_dim_date.'Date Key'
+
+relationship b5d3aade-75fa-2245-fbae-cfb40643344e
+	fromColumn: gld_fact_purchase_receipt.'Receipt Date'
+	toColumn: gld_dim_date.'Date Key'
+
+relationship 5e7d344e-6c61-ad0a-783d-b8d3f794c802
+	fromColumn: gld_fact_shipment.'Requested Delivery Date'
+	toColumn: gld_dim_date.'Date Key'
+

@@ -1,0 +1,55 @@
+table gld_dim_supplier
+	lineageTag: 79092494-e46c-4522-b08e-f584aa691724
+	sourceLineageTag: [dbo].[gld_dim_supplier]
+
+	column 'Supplier ID'
+		dataType: string
+		lineageTag: dfd94fde-9d5a-4b10-adb8-965545fb5c74
+		sourceLineageTag: supplier_id
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier Name'
+		dataType: string
+		lineageTag: 5f1c93bc-240a-43f5-ab67-312d636c4c77
+		sourceLineageTag: supplier_name
+		summarizeBy: none
+		sourceColumn: supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Code'
+		dataType: string
+		lineageTag: 8326c6b9-a542-4cc7-a597-3b7af357cbb9
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Terms'
+		dataType: string
+		lineageTag: ef7d5ce3-a82e-4f9a-b29a-9c4641c39445
+		sourceLineageTag: payment_terms
+		summarizeBy: none
+		sourceColumn: payment_terms
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Active'
+		dataType: string
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 395d4158-9e53-4dd3-aebc-8ba5ca5b1b00
+		sourceLineageTag: is_active
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_dim_supplier = entity
+		mode: directLake
+		source
+			entityName: gld_dim_supplier
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'

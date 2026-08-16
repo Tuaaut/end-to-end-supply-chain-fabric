@@ -1,0 +1,419 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "c541f1602543138155ab",
+    "position": {
+        "x": 8.333333333333334,
+        "y": 553.3333333333334,
+        "z": 2000,
+        "height": 493.33333333333337,
+        "width": 1245,
+        "tabOrder": 2000
+    },
+    "visual": {
+        "visualType": "pivotTable",
+        "query": {
+            "queryState": {
+                "Columns": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_location"
+                                        }
+                                    },
+                                    "Property": "Location Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_location.Location Name",
+                            "nativeQueryRef": "Location Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Rows": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_product"
+                                        }
+                                    },
+                                    "Property": "Product Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_product.Product Name",
+                            "nativeQueryRef": "Product Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Values": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Aggregation": {
+                                    "Expression": {
+                                        "Column": {
+                                            "Expression": {
+                                                "SourceRef": {
+                                                    "Entity": "gld_fact_inventory_snapshot"
+                                                }
+                                            },
+                                            "Property": "Available Quantity"
+                                        }
+                                    },
+                                    "Function": 0
+                                }
+                            },
+                            "queryRef": "Sum(gld_fact_inventory_snapshot.Available Quantity)",
+                            "nativeQueryRef": "Sum of Available Quantity"
+                        },
+                        {
+                            "field": {
+                                "Aggregation": {
+                                    "Expression": {
+                                        "Column": {
+                                            "Expression": {
+                                                "SourceRef": {
+                                                    "Entity": "gld_fact_inventory_snapshot"
+                                                }
+                                            },
+                                            "Property": "Safety Stock Quantity"
+                                        }
+                                    },
+                                    "Function": 0
+                                }
+                            },
+                            "queryRef": "Sum(gld_fact_inventory_snapshot.Safety Stock Quantity)",
+                            "nativeQueryRef": "Sum of Safety Stock Quantity"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Aggregation": {
+                                "Expression": {
+                                    "Column": {
+                                        "Expression": {
+                                            "SourceRef": {
+                                                "Entity": "gld_fact_inventory_snapshot"
+                                            }
+                                        },
+                                        "Property": "Available Quantity"
+                                    }
+                                },
+                                "Function": 0
+                            }
+                        },
+                        "direction": "Ascending"
+                    }
+                ]
+            }
+        },
+        "objects": {
+            "values": [
+                {
+                    "properties": {
+                        "backColor": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "FillRule": {
+                                            "Input": {
+                                                "Aggregation": {
+                                                    "Expression": {
+                                                        "Column": {
+                                                            "Expression": {
+                                                                "SourceRef": {
+                                                                    "Entity": "gld_fact_inventory_snapshot"
+                                                                }
+                                                            },
+                                                            "Property": "Available Quantity"
+                                                        }
+                                                    },
+                                                    "Function": 0
+                                                }
+                                            },
+                                            "FillRule": {
+                                                "linearGradient3": {
+                                                    "min": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#F8696B'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "mid": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#FFEB84'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "max": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#63BE7B'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "nullColoringStrategy": {
+                                                        "strategy": {
+                                                            "Literal": {
+                                                                "Value": "'asZero'"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "selector": {
+                        "data": [
+                            {
+                                "dataViewWildcard": {
+                                    "matchingOption": 1
+                                }
+                            }
+                        ],
+                        "metadata": "Sum(gld_fact_inventory_snapshot.Available Quantity)"
+                    }
+                },
+                {
+                    "properties": {
+                        "backColor": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "FillRule": {
+                                            "Input": {
+                                                "Aggregation": {
+                                                    "Expression": {
+                                                        "Column": {
+                                                            "Expression": {
+                                                                "SourceRef": {
+                                                                    "Entity": "gld_fact_inventory_snapshot"
+                                                                }
+                                                            },
+                                                            "Property": "Safety Stock Quantity"
+                                                        }
+                                                    },
+                                                    "Function": 0
+                                                }
+                                            },
+                                            "FillRule": {
+                                                "linearGradient3": {
+                                                    "min": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#E8F1FB'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "mid": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#6FA8DC'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "max": {
+                                                        "color": {
+                                                            "Literal": {
+                                                                "Value": "'#1F4E79'"
+                                                            }
+                                                        }
+                                                    },
+                                                    "nullColoringStrategy": {
+                                                        "strategy": {
+                                                            "Literal": {
+                                                                "Value": "'asZero'"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "selector": {
+                        "data": [
+                            {
+                                "dataViewWildcard": {
+                                    "matchingOption": 1
+                                }
+                            }
+                        ],
+                        "metadata": "Sum(gld_fact_inventory_snapshot.Safety Stock Quantity)"
+                    }
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "radius": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "748b7e10222433242423",
+                "ordinal": 0,
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_dim_date"
+                            }
+                        },
+                        "Property": "Month Name"
+                    }
+                },
+                "type": "Categorical",
+                "filter": {
+                    "Version": 2,
+                    "From": [
+                        {
+                            "Name": "g",
+                            "Entity": "gld_dim_date",
+                            "Type": 0
+                        }
+                    ],
+                    "Where": [
+                        {
+                            "Condition": {
+                                "Not": {
+                                    "Expression": {
+                                        "In": {
+                                            "Expressions": [
+                                                {
+                                                    "Column": {
+                                                        "Expression": {
+                                                            "SourceRef": {
+                                                                "Source": "g"
+                                                            }
+                                                        },
+                                                        "Property": "Month Name"
+                                                    }
+                                                }
+                                            ],
+                                            "Values": [
+                                                [
+                                                    {
+                                                        "Literal": {
+                                                            "Value": "null"
+                                                        }
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "howCreated": "User",
+                "objects": {
+                    "general": [
+                        {
+                            "properties": {
+                                "isInvertedSelectionMode": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "1149678e4ad077470a7b",
+                "ordinal": 1,
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_dim_date"
+                            }
+                        },
+                        "Property": "Month Name"
+                    }
+                },
+                "type": "Categorical",
+                "howCreated": "User"
+            },
+            {
+                "name": "bda0eb48773acc0e0392",
+                "ordinal": 2,
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_sales_order_line"
+                            }
+                        },
+                        "Property": "Total Sales THB"
+                    }
+                },
+                "type": "Advanced",
+                "howCreated": "User"
+            }
+        ],
+        "filterSortOrder": "Custom"
+    }
+}

@@ -1,0 +1,91 @@
+table gld_dim_date
+	lineageTag: 08cb469c-5704-4c00-a920-0340303d7e31
+	sourceLineageTag: [dbo].[gld_dim_date]
+
+	column 'Date Key'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 610234c1-1772-4ece-96b8-eb5f26e9adff
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 302d3d39-5491-4ddf-b49f-d60cf6c98522
+		sourceLineageTag: year
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 176113e4-b37f-4dcf-8764-1ba179cfc8ec
+		sourceLineageTag: quarter
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: d213cbad-e6e9-436f-acdd-3a134b60153f
+		sourceLineageTag: month_number
+		summarizeBy: sum
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 06358e3b-19d0-4940-b7aa-c06bdf890cdd
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: 'Month Number'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: d5434ae7-4369-459c-a00b-397af2534625
+		sourceLineageTag: week_of_year
+		summarizeBy: sum
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 870e91ca-c4d1-42f1-bbc7-13511636f11e
+		sourceLineageTag: day_of_month
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Name'
+		dataType: string
+		lineageTag: e6332034-6852-4951-9821-07917e37c84f
+		sourceLineageTag: day_name
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_dim_date = entity
+		mode: directLake
+		source
+			entityName: gld_dim_date
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

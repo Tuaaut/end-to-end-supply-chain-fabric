@@ -1,0 +1,37 @@
+{
+  "environment": "<UAT_OR_PROD>",
+  "tenant_id": "<DESTINATION_TENANT_ID>",
+  "workspace": {
+    "name": "<DESTINATION_WORKSPACE_NAME>",
+    "id": "<DESTINATION_WORKSPACE_ID>"
+  },
+  "lakehouse": {
+    "name": "<DESTINATION_LAKEHOUSE_NAME>",
+    "id": "<DESTINATION_LAKEHOUSE_ID>",
+    "sql_endpoint_id": "<DESTINATION_SQL_ENDPOINT_ID>"
+  },
+  "notebooks": {
+    "silver_supplier_id": "<DESTINATION_NOTEBOOK_ID>",
+    "silver_product_id": "<DESTINATION_NOTEBOOK_ID>",
+    "silver_commercial_id": "<DESTINATION_NOTEBOOK_ID>",
+    "silver_fulfillment_id": "<DESTINATION_NOTEBOOK_ID>",
+    "silver_planning_ops_id": "<DESTINATION_NOTEBOOK_ID>",
+    "gold_dimensions_id": "<DESTINATION_NOTEBOOK_ID>",
+    "gold_facts_id": "<DESTINATION_NOTEBOOK_ID>"
+  },
+  "pipeline": {
+    "name": "<DESTINATION_PIPELINE_NAME_V2>",
+    "id": "<DESTINATION_PIPELINE_ID_AFTER_IMPORT>"
+  },
+  "semantic_model": {
+    "name": "<DESTINATION_SEMANTIC_MODEL_NAME>",
+    "id": "<DESTINATION_SEMANTIC_MODEL_ID_AFTER_IMPORT>"
+  },
+  "report": {
+    "name": "<DESTINATION_REPORT_NAME>",
+    "id": "<DESTINATION_REPORT_ID_AFTER_IMPORT>"
+  },
+  "semantic_refresh_connection_id": "<DESTINATION_CONNECTION_ID_AFTER_AUTHORIZATION>",
+  "bronze_mode": "<EXISTING_DATA_OR_APPROVED_BOOTSTRAP>",
+  "schedules_enabled": false
+}

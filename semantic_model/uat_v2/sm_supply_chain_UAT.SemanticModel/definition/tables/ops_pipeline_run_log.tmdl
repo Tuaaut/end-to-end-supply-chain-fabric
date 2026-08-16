@@ -1,0 +1,70 @@
+table ops_pipeline_run_log
+	lineageTag: 8e0f53ab-5ce9-4e39-9a86-733c5e6af8d1
+	sourceLineageTag: [dbo].[ops_pipeline_run_log]
+
+	measure 'Pipeline Log Rows' = COUNTROWS('ops_pipeline_run_log')
+		formatString: #,0
+
+	measure 'Last Successful Pipeline Run' = CALCULATE(MAX('ops_pipeline_run_log'[Ended At]), 'ops_pipeline_run_log'[Status] = "SUCCESS")
+		formatString: dd MMM HH:mm
+
+	measure 'Latest Pipeline Status' = VAR LatestEnd = CALCULATE(MAX('ops_pipeline_run_log'[Ended At]), ALL('ops_pipeline_run_log')) RETURN CALCULATE(MAX('ops_pipeline_run_log'[Status]), 'ops_pipeline_run_log'[Ended At] = LatestEnd)
+
+	measure 'Latest Gold Input Watermark' = MAX('ops_gold_input_watermark'[Silver Watermark])
+		formatString: dd MMM HH:mm
+
+	column 'Pipeline Run ID'
+		dataType: string
+		lineageTag: 3e0c0c9b-739e-4d8a-a990-35cf3f1cc5b2
+		sourceLineageTag: pipeline_run_id
+		summarizeBy: none
+		sourceColumn: pipeline_run_id
+
+	column 'Orchestrator Name'
+		dataType: string
+		lineageTag: 6f92d113-0f3b-4c7d-8f27-1db16d93d9e4
+		sourceLineageTag: orchestrator_name
+		summarizeBy: none
+		sourceColumn: orchestrator_name
+
+	column 'Notebook Name'
+		dataType: string
+		lineageTag: 4cc8e03a-cf37-45d9-95a9-bf3fb9c0d809
+		sourceLineageTag: notebook_name
+		summarizeBy: none
+		sourceColumn: notebook_name
+
+	column 'Started At'
+		dataType: dateTime
+		lineageTag: 2e38a9ae-ef77-45b9-a0aa-1e2dfac11ef5
+		sourceLineageTag: started_at
+		summarizeBy: none
+		sourceColumn: started_at
+
+	column 'Ended At'
+		dataType: dateTime
+		lineageTag: 4a6d6a76-63e1-4c9a-a4f9-e2a0f2e1b1a3
+		sourceLineageTag: ended_at
+		summarizeBy: none
+		sourceColumn: ended_at
+
+	column Status
+		dataType: string
+		lineageTag: 7d2fb8f4-13a1-49a7-8271-b8b684b5b9bd
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+	column Message
+		dataType: string
+		lineageTag: 83ba6b89-cf8d-4e8d-a895-08a83f2a4b6a
+		sourceLineageTag: message
+		summarizeBy: none
+		sourceColumn: message
+
+	partition ops_pipeline_run_log = entity
+		mode: directLake
+		source
+			entityName: ops_pipeline_run_log
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

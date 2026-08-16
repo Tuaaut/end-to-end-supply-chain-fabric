@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "ONELAKE_WORKSPACE_ID": "4688c380-9b2c-4215-ae5a-439e72649eb7",
+    "ONELAKE_LAKEHOUSE_ID": "ecee3cbd-b722-4583-9b1a-9f6feccfb812",
+    "FABRIC_WORKSPACE_ID": "4688c380-9b2c-4215-ae5a-439e72649eb7",
+    "FABRIC_EVENT_PIPELINE_ID": "b7871458-e00c-4f9a-8388-021581797c42"
+  }
+}

@@ -1,0 +1,108 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "1e5ab5fdd93721631538",
+    "position": {
+        "x": 359,
+        "y": 290,
+        "z": 3,
+        "height": 280,
+        "width": 280,
+        "tabOrder": 3
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_sales_order_line"
+                                        }
+                                    },
+                                    "Property": "Sales Order Line Count"
+                                }
+                            },
+                            "queryRef": "gld_fact_sales_order_line.Sales Order Line Count",
+                            "nativeQueryRef": "Sales Order Line Count"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_sales_order_line"
+                                    }
+                                },
+                                "Property": "Sales Order Line Count"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 1,
+                                            "Percent": 0.6
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "b3c3d609405000b38dce",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_sales_order_line"
+                            }
+                        },
+                        "Property": "Sales Order Line Count"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

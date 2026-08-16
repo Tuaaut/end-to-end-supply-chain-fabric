@@ -1,0 +1,146 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "donut001",
+    "position": {
+        "x": 650,
+        "y": 600,
+        "z": 5000,
+        "height": 470,
+        "width": 614,
+        "tabOrder": 5000
+    },
+    "visual": {
+        "visualType": "donutChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Status"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Status",
+                            "nativeQueryRef": "Status",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Aggregation": {
+                                    "Expression": {
+                                        "Column": {
+                                            "Expression": {
+                                                "SourceRef": {
+                                                    "Entity": "ops_data_quality_summary"
+                                                }
+                                            },
+                                            "Property": "Actual Value"
+                                        }
+                                    },
+                                    "Function": 0
+                                }
+                            },
+                            "queryRef": "Sum(ops_data_quality_summary.Actual Value)",
+                            "nativeQueryRef": "Sum of Actual Value"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualContainerObjects": {
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'DQ status distribution'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "677fcd16374006b417a2",
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Status"
+                    }
+                },
+                "type": "Categorical"
+            },
+            {
+                "name": "253b0522052450c7c6bb",
+                "field": {
+                    "Aggregation": {
+                        "Expression": {
+                            "Column": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "ops_data_quality_summary"
+                                    }
+                                },
+                                "Property": "Actual Value"
+                            }
+                        },
+                        "Function": 0
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

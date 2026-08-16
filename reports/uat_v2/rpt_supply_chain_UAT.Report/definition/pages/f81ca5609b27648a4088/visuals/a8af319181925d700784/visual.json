@@ -1,0 +1,108 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "a8af319181925d700784",
+    "position": {
+        "x": 715.4716981132076,
+        "y": 0,
+        "z": 5,
+        "height": 280,
+        "width": 280,
+        "tabOrder": 5
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_incremental_file_watermark"
+                                        }
+                                    },
+                                    "Property": "Latest Bronze File Watermark"
+                                }
+                            },
+                            "queryRef": "ops_incremental_file_watermark.Latest Bronze File Watermark",
+                            "nativeQueryRef": "Latest Bronze File Watermark"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "ops_incremental_file_watermark"
+                                    }
+                                },
+                                "Property": "Latest Bronze File Watermark"
+                            }
+                        },
+                        "direction": "Ascending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 1,
+                                            "Percent": 0.6
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "f0c890549a7c8c600b30",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_incremental_file_watermark"
+                            }
+                        },
+                        "Property": "Latest Bronze File Watermark"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

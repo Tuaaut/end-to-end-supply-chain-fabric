@@ -1,0 +1,99 @@
+table gld_dim_product
+	lineageTag: 5ee9215e-9037-4574-a528-584bb5aeae02
+	sourceLineageTag: [dbo].[gld_dim_product]
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 40a6cf30-1338-4a85-9bd9-75377f09ee44
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: c426e20a-d189-46d8-81f7-e0f6f2deda1a
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Name'
+		dataType: string
+		lineageTag: 7e636689-ac3c-4e23-8a22-30a1a7ce8631
+		sourceLineageTag: category_name
+		summarizeBy: none
+		sourceColumn: category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcategory Name'
+		dataType: string
+		lineageTag: 4db2dc71-45c7-4bde-b90e-fdc66d9b9566
+		sourceLineageTag: subcategory_name
+		summarizeBy: none
+		sourceColumn: subcategory_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Supplier Id'
+		dataType: string
+		lineageTag: 75ec5777-e044-4684-94b8-3d7cd02fbda2
+		sourceLineageTag: primary_supplier_id
+		summarizeBy: none
+		sourceColumn: primary_supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Weight Kg'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 207562dd-5b11-42e4-bdec-a8da74caacd4
+		sourceLineageTag: unit_weight_kg
+		summarizeBy: sum
+		sourceColumn: unit_weight_kg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Unit List Price THB'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f5a4c71a-6bfb-40fa-81cf-7160b5adc08c
+		sourceLineageTag: unit_list_price_thb
+		summarizeBy: sum
+		sourceColumn: unit_list_price_thb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Shelf Life Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8096a6ce-f0a6-4918-abdd-e0e0cebffc2b
+		sourceLineageTag: shelf_life_days
+		summarizeBy: sum
+		sourceColumn: shelf_life_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Active'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 921abf73-21dd-43e3-b485-bf1ca363ad0c
+		sourceLineageTag: is_active
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_dim_product = entity
+		mode: directLake
+		source
+			entityName: gld_dim_product
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

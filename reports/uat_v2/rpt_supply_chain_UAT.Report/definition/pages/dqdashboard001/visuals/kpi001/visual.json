@@ -1,0 +1,244 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "kpi001",
+    "position": {
+        "x": 16,
+        "y": 170,
+        "z": 1000,
+        "height": 150,
+        "width": 1248,
+        "tabOrder": 1000
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "DQ Score"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.DQ Score",
+                            "nativeQueryRef": "DQ Score"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Failed Checks"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Failed Checks",
+                            "nativeQueryRef": "Failed Checks"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Warning Checks"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Warning Checks",
+                            "nativeQueryRef": "Warning Checks"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Quarantined Rows"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Quarantined Rows",
+                            "nativeQueryRef": "Quarantined Rows"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Latest DQ Check"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Latest DQ Check",
+                            "nativeQueryRef": "Latest DQ Check"
+                        }
+                    ]
+                }
+            }
+        },
+        "objects": {
+            "label": [
+                {
+                    "properties": {
+                        "fontSize": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "10D"
+                                }
+                            }
+                        },
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "properties": {
+                        "fontSize": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "24D"
+                                }
+                            }
+                        },
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "75ba39a715e19280a05b",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "DQ Score"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "065a13381708a02bb8d1",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Failed Checks"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "1d42fbe6eb3592725917",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Warning Checks"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "f4ae4ba50263a6806e13",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Quarantined Rows"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "f722ad40891bc7c08710",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Latest DQ Check"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

@@ -1,0 +1,71 @@
+table gld_dim_route
+	lineageTag: d87073d5-e2aa-4d5c-976f-53173cbac16f
+	sourceLineageTag: [dbo].[gld_dim_route]
+
+	column 'Route ID'
+		dataType: string
+		lineageTag: 7f95cdbc-155e-422d-a317-91e5e15a6f24
+		sourceLineageTag: route_id
+		summarizeBy: none
+		sourceColumn: route_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Origin Location ID'
+		dataType: string
+		lineageTag: 06596933-c274-4041-b316-2fb06c23f517
+		sourceLineageTag: origin_location_id
+		summarizeBy: none
+		sourceColumn: origin_location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Destination Region'
+		dataType: string
+		lineageTag: b889bad1-94cd-4303-9ef1-e38145d0b6cb
+		sourceLineageTag: destination_region
+		summarizeBy: none
+		sourceColumn: destination_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Distance (km)'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 5a926624-e08c-496c-9044-dd1fb61e16b0
+		sourceLineageTag: distance_km
+		summarizeBy: none
+		sourceColumn: distance_km
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Standard Transit Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 59355112-4ec2-47f5-a30e-3a3ccffafcab
+		sourceLineageTag: standard_transit_days
+		summarizeBy: none
+		sourceColumn: standard_transit_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Toll Cost THB'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: fc8ce2b9-207a-4461-bf72-4e6fb36266f3
+		sourceLineageTag: toll_cost_thb
+		summarizeBy: none
+		sourceColumn: toll_cost_thb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition gld_dim_route = entity
+		mode: directLake
+		source
+			entityName: gld_dim_route
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

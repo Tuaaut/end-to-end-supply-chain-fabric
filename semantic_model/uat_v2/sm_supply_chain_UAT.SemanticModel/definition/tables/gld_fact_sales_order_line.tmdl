@@ -1,0 +1,196 @@
+table gld_fact_sales_order_line
+	lineageTag: 8eea3c1e-08c3-4be4-8fdb-06e5bdd6fbc5
+	sourceLineageTag: [dbo].[gld_fact_sales_order_line]
+
+	measure 'Total Sales THB' = SUM('gld_fact_sales_order_line'[Gross Sales THB])
+		formatString: #,0.00
+		lineageTag: ce3890d1-ff69-4a80-92fb-7f54661f8ca3
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Total Ordered Qty' = SUM('gld_fact_sales_order_line'[Ordered Quantity])
+		formatString: #,0
+		lineageTag: 069cd72b-88a7-4893-a6d3-147c49cf4258
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Total Allocated Qty' = SUM('gld_fact_sales_order_line'[Allocated Quantity])
+		formatString: #,0
+		lineageTag: 43ceec93-ec64-4493-9649-36754f4852db
+
+	measure 'Fill Rate' = DIVIDE(SUM('gld_fact_sales_order_line'[Allocated Quantity]), SUM('gld_fact_sales_order_line'[Ordered Quantity]))
+		formatString: 0.0%
+		lineageTag: 441d97ff-59b2-45ce-baeb-4ca7383cadf3
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Sales Order Line Count' = COUNTROWS('gld_fact_sales_order_line')
+		formatString: #,0
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 2990bb0a-2cd4-4910-9840-0a83f8b98136
+		sourceLineageTag: order_id
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Line Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 77fc5954-fe12-4982-a4d4-33c29b804de8
+		sourceLineageTag: order_line_no
+		summarizeBy: sum
+		sourceColumn: order_line_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 71004f5c-b8d3-4747-8be5-7793bec5eb02
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fulfillment Location ID'
+		dataType: string
+		lineageTag: 8f7e41e2-86e5-4035-9b33-ee922778d27a
+		sourceLineageTag: fulfillment_location_id
+		summarizeBy: none
+		sourceColumn: fulfillment_location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 9977c720-8852-4e9c-95aa-c7cb7f99d9f9
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Timestamp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8292ceba-c843-448a-92c4-c0c91346cd32
+		sourceLineageTag: order_timestamp
+		summarizeBy: none
+		sourceColumn: order_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requested Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 660a2b3f-4078-444b-ab66-67c63702fb15
+		sourceLineageTag: requested_delivery_date
+		summarizeBy: none
+		sourceColumn: requested_delivery_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Channel'
+		dataType: string
+		lineageTag: b246b485-f703-4c9f-bb21-ea68563f25f8
+		sourceLineageTag: sales_channel
+		summarizeBy: none
+		sourceColumn: sales_channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Priority'
+		dataType: string
+		lineageTag: c734b885-ed0d-4829-91e9-6585df3d9e37
+		sourceLineageTag: order_priority
+		summarizeBy: none
+		sourceColumn: order_priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Status'
+		dataType: string
+		lineageTag: 29a97360-3c62-43c3-bb2d-bab1c9535c10
+		sourceLineageTag: order_status
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordered Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 31988d23-855f-408b-a54d-ad8fb6f854af
+		sourceLineageTag: ordered_qty
+		summarizeBy: sum
+		sourceColumn: ordered_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allocated Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d53cd3f-46fa-499e-8291-8bd1a908c64f
+		sourceLineageTag: allocated_qty
+		summarizeBy: sum
+		sourceColumn: allocated_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price THB'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 0ddaa9eb-1b76-46ad-82c3-eb4b58e2344a
+		sourceLineageTag: unit_price_thb
+		summarizeBy: sum
+		sourceColumn: unit_price_thb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Gross Sales THB'
+		dataType: double
+		lineageTag: fc87c2b8-17b4-4b8a-9bce-1361d91b3d49
+		sourceLineageTag: gross_sales_thb
+		summarizeBy: sum
+		sourceColumn: gross_sales_thb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Promotion Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09abdb0d-53c4-4086-9ad6-cd227080d251
+		sourceLineageTag: promotion_flag
+		summarizeBy: none
+		sourceColumn: promotion_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Line Status'
+		dataType: string
+		lineageTag: 412657a3-f9bf-43da-93ed-1f80483ac723
+		sourceLineageTag: line_status
+		summarizeBy: none
+		sourceColumn: line_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_sales_order_line = entity
+		mode: directLake
+		source
+			entityName: gld_fact_sales_order_line
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

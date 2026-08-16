@@ -1,0 +1,108 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "bfb7d346e0041c28422e",
+    "position": {
+        "x": 10,
+        "y": 290,
+        "z": 6,
+        "height": 280,
+        "width": 280,
+        "tabOrder": 6
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_pipeline_run_log"
+                                        }
+                                    },
+                                    "Property": "Latest Gold Input Watermark"
+                                }
+                            },
+                            "queryRef": "ops_pipeline_run_log.Latest Gold Input Watermark",
+                            "nativeQueryRef": "Latest Gold Input Watermark"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "ops_pipeline_run_log"
+                                    }
+                                },
+                                "Property": "Latest Gold Input Watermark"
+                            }
+                        },
+                        "direction": "Ascending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 1,
+                                            "Percent": 0.6
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "3bf7330a3939d56369de",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_pipeline_run_log"
+                            }
+                        },
+                        "Property": "Latest Gold Input Watermark"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

@@ -1,0 +1,90 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "58d4dd8f93a8753270e4",
+    "position": {
+        "x": 359,
+        "y": 570,
+        "z": 4,
+        "height": 150,
+        "width": 280,
+        "tabOrder": 4
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "ops_data_quality_summary"
+                                        }
+                                    },
+                                    "Property": "Latest DQ Status"
+                                }
+                            },
+                            "queryRef": "ops_data_quality_summary.Latest DQ Status",
+                            "nativeQueryRef": "Latest DQ Status"
+                        }
+                    ]
+                }
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 1,
+                                            "Percent": 0.6
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "eaec6f50ee4e8a5e0e0c",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "ops_data_quality_summary"
+                            }
+                        },
+                        "Property": "Latest DQ Status"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

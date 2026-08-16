@@ -1,0 +1,77 @@
+table gld_dim_customer
+	lineageTag: ab315cb5-7fc3-4cbd-a66a-bc83db8706f8
+	sourceLineageTag: [dbo].[gld_dim_customer]
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 3bd848fa-c334-445a-9701-7473b2c6dab2
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 2f3196e4-00e7-4312-8d03-c04ee0f06f0a
+		sourceLineageTag: customer_name
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 71fce1d1-8b0c-45e1-bab8-d95794756571
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 4076625b-cb49-447b-ab40-64a3cae60b35
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Tier'
+		dataType: string
+		lineageTag: a476abc2-25ab-43cd-9a51-a1f5795d7bd3
+		sourceLineageTag: service_tier
+		summarizeBy: none
+		sourceColumn: service_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 9fa2c045-755d-483b-bfb8-0918f57f9201
+		sourceLineageTag: latitude
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 873cbf15-85e3-4b9c-90aa-275b3a03bdba
+		sourceLineageTag: longitude
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gld_dim_customer = entity
+		mode: directLake
+		source
+			entityName: gld_dim_customer
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

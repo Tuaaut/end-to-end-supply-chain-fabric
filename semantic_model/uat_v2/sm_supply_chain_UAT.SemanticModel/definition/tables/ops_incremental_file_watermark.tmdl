@@ -1,0 +1,27 @@
+table ops_incremental_file_watermark
+	lineageTag: 0d399b67-3eb5-4d3b-a6ce-6422c59ca4d0
+	sourceLineageTag: [dbo].[ops_incremental_file_watermark]
+
+	measure 'Latest Bronze File Watermark' = MAX('ops_incremental_file_watermark'[Last File Modified At])
+		formatString: dd MMM HH:mm
+
+	column 'Process Name'
+		dataType: string
+		lineageTag: 0e6cc6e7-4bf1-4fbf-8ab5-5c8f0f64763f
+		sourceLineageTag: process_name
+		summarizeBy: none
+		sourceColumn: process_name
+
+	column 'Last File Modified At'
+		dataType: dateTime
+		lineageTag: 6b7a550c-9756-47a2-ae95-9393c9e9e0db
+		sourceLineageTag: last_file_modified_at
+		summarizeBy: none
+		sourceColumn: last_file_modified_at
+
+	partition ops_incremental_file_watermark = entity
+		mode: directLake
+		source
+			entityName: ops_incremental_file_watermark
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

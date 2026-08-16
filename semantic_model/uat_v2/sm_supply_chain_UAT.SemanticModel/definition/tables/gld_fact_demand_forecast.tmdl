@@ -1,0 +1,102 @@
+table gld_fact_demand_forecast
+	lineageTag: 2b7eaa16-4316-4819-8ee3-0c6ca4341a67
+	sourceLineageTag: [dbo].[gld_fact_demand_forecast]
+
+	measure 'Forecast Qty' = SUM('gld_fact_demand_forecast'[Forecast Quantity])
+		formatString: '#,0'
+		lineageTag: 4bb01dc5-e7f5-499d-bd5e-d1e56628f154
+
+	measure 'Actual Demand Qty' = SUM('gld_fact_demand_forecast'[Actual Demand Quantity])
+		formatString: '#,0'
+		lineageTag: 97f53383-34ec-43b8-93ad-1b427443f706
+
+	measure 'Forecast Accuracy' = 1 - DIVIDE(SUMX('gld_fact_demand_forecast', ABS('gld_fact_demand_forecast'[Forecast Error Quantity])), SUM('gld_fact_demand_forecast'[Actual Demand Quantity]))
+		formatString: 0.0%
+		lineageTag: 09e0e87c-9805-460d-a94a-f7ee89cb981e
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Demand Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d14af5a5-8355-4c0b-94b3-4a4621798cd3
+		sourceLineageTag: demand_date
+		summarizeBy: none
+		sourceColumn: demand_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: a1ee6270-c074-4acb-988f-0ba9c730d4dd
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location ID'
+		dataType: string
+		lineageTag: b22f9f6c-628b-447a-be64-55c0031d91f9
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Version'
+		dataType: string
+		lineageTag: 5f56bb68-db1b-4dc9-a289-0f01c3107a17
+		sourceLineageTag: forecast_version
+		summarizeBy: none
+		sourceColumn: forecast_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 17e18b63-08e8-48bc-80e9-cf2c195d6eba
+		sourceLineageTag: forecast_qty
+		summarizeBy: sum
+		sourceColumn: forecast_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Demand Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 59cfac7f-c2d9-48f5-89fb-c25f5679d945
+		sourceLineageTag: actual_demand_qty
+		summarizeBy: sum
+		sourceColumn: actual_demand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forecast Error Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: dc4ddeaa-02c1-4525-8b8a-fbd4d7262a43
+		sourceLineageTag: forecast_error_qty
+		summarizeBy: sum
+		sourceColumn: forecast_error_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Demand UOM'
+		dataType: string
+		lineageTag: 0c2da856-df9d-469d-bc83-537366baf1a5
+		sourceLineageTag: demand_uom
+		summarizeBy: none
+		sourceColumn: demand_uom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_demand_forecast = entity
+		mode: directLake
+		source
+			entityName: gld_fact_demand_forecast
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

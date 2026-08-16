@@ -1,0 +1,204 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "deceea4a352d42a162d4",
+    "position": {
+        "x": 5.646651119146491,
+        "y": 174.08110551728097,
+        "z": 1000,
+        "height": 148.8343120397106,
+        "width": 1270.4071634818154,
+        "tabOrder": 1000
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_sales_order_line"
+                                        }
+                                    },
+                                    "Property": "Total Sales THB"
+                                }
+                            },
+                            "queryRef": "gld_fact_sales_order_line.Total Sales THB",
+                            "nativeQueryRef": "Total Sales THB"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_sales_order_line"
+                                        }
+                                    },
+                                    "Property": "Fill Rate"
+                                }
+                            },
+                            "queryRef": "gld_fact_sales_order_line.Fill Rate",
+                            "nativeQueryRef": "Fill Rate"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_inventory_snapshot"
+                                        }
+                                    },
+                                    "Property": "On Hand Qty"
+                                }
+                            },
+                            "queryRef": "gld_fact_inventory_snapshot.On Hand Qty",
+                            "nativeQueryRef": "On Hand Qty"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_sales_order_line"
+                                        }
+                                    },
+                                    "Property": "Total Ordered Qty"
+                                }
+                            },
+                            "queryRef": "gld_fact_sales_order_line.Total Ordered Qty",
+                            "nativeQueryRef": "Total Ordered Qty"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_inventory_snapshot"
+                                        }
+                                    },
+                                    "Property": "Low Stock Snapshot Count"
+                                }
+                            },
+                            "queryRef": "gld_fact_inventory_snapshot.Low Stock Snapshot Count",
+                            "nativeQueryRef": "Low Stock Snapshot Count"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_demand_forecast"
+                                        }
+                                    },
+                                    "Property": "Forecast Accuracy"
+                                }
+                            },
+                            "queryRef": "gld_fact_demand_forecast.Forecast Accuracy",
+                            "nativeQueryRef": "Forecast Accuracy"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_sales_order_line"
+                                    }
+                                },
+                                "Property": "Total Sales THB"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "objects": {
+            "label": [
+                {
+                    "properties": {
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "properties": {
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "smallMultiplesBorder": [
+                {
+                    "properties": {
+                        "gridlineColor": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "gridlineTransparency": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "100D"
+                                }
+                            }
+                        },
+                        "gridlineWidth": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    },
+                    "selector": {
+                        "id": "default"
+                    }
+                }
+            ],
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        }
+                    },
+                    "selector": {
+                        "id": "default"
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

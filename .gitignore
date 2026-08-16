@@ -1,0 +1,60 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Azure Functions local secrets and settings
+local.settings.json
+*.local.json
+*.pem
+*.pfx
+*.key
+*credentials*
+*secret*
+*token*
+
+# Generated and temporary Fabric artifacts
+.fabric_export_*/
+.fabric_export_tmp*/
+build_output/
+azure_function/event_driven/build_output/
+*.zip
+*.log
+*.tmp
+*.bak
+
+# Generated data and local run fixtures
+data/raw/dev/
+data/bronze_batches/
+local_progress/
+
+# Learning and exploratory material intentionally kept out of the release repo
+LEARNING_PATH.md
+notebooks/legacy/
+notebooks/diagnostics/
+azure_function/event_driven/reference/
+
+# Local screenshots and visual/debug exports
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+dq_final.png
+
+# Draft or scratch notes
+*draft*
+*scratch*
+*notes*
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo

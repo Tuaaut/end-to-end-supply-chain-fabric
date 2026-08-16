@@ -1,0 +1,56 @@
+table gld_dim_location
+	lineageTag: 9197c8d3-64a5-40bc-985a-d352db06d46b
+	sourceLineageTag: [dbo].[gld_dim_location]
+
+	column location_id
+		dataType: string
+		lineageTag: be5e060b-89b1-496a-b697-73d3de3dc810
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location Name'
+		dataType: string
+		lineageTag: df7c6dd2-2ea0-4f48-90b9-06daf19c67e5
+		sourceLineageTag: location_name
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: cc9974a8-a747-46f0-a92e-f96501865e73
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		lineageTag: dc125536-daa1-4c60-b06b-810edc1df643
+		sourceLineageTag: country_code
+		summarizeBy: none
+		sourceColumn: country_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column storage_capacity_units
+		dataType: int64
+		formatString: 0
+		lineageTag: e2ffc460-3044-422d-bdad-da489b1a984e
+		sourceLineageTag: storage_capacity_units
+		summarizeBy: sum
+		sourceColumn: storage_capacity_units
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_dim_location = entity
+		mode: directLake
+		source
+			entityName: gld_dim_location
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

@@ -1,0 +1,9 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
+    "version": "4.0",
+    "datasetReference": {
+        "byConnection": {
+            "connectionString": "Data Source=powerbi://api.powerbi.com/v1.0/myorg/SupplyChain-UAT;initial catalog=sm_supply_chain_UAT;integrated security=ClaimsToken;semanticmodelid=53a532ab-0547-4893-8bfc-c3e4eb348cc3"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DirectLake - lh_supply_chain_UAT"]
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","TMDLView_Desktop"]
+
+ref table gld_fact_shipment
+ref table gld_dim_customer
+ref table gld_dim_route
+ref table gld_dim_date
+ref table gld_fact_sales_order_line
+ref table gld_fact_demand_forecast
+ref table gld_fact_inventory_snapshot
+ref table gld_dim_supplier
+ref table gld_dim_carrier
+ref table gld_dim_location
+ref table gld_dim_product
+ref table gld_fact_purchase_receipt
+ref table ops_data_quality_summary
+ref table ops_pipeline_run_log
+ref table ops_incremental_file_watermark
+ref table ops_gold_input_watermark

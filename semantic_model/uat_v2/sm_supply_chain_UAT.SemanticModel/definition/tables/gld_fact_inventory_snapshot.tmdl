@@ -1,0 +1,107 @@
+table gld_fact_inventory_snapshot
+	lineageTag: 650cfee0-2c39-45c2-b4c2-6cc508714c60
+	sourceLineageTag: [dbo].[gld_fact_inventory_snapshot]
+
+	measure 'On Hand Qty' = SUM('gld_fact_inventory_snapshot'[On Hand Quantity])
+		formatString: #,0
+		lineageTag: 5c05fa93-35f7-4e5a-b759-1bb302e7f00e
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Available Qty' = SUM('gld_fact_inventory_snapshot'[Available Quantity])
+		formatString: '#,0'
+		lineageTag: b0ee93b1-fe8b-4a57-9736-1480049e3b3b
+
+	measure 'Low Stock Snapshot Count' = COUNTROWS(FILTER('gld_fact_inventory_snapshot', 'gld_fact_inventory_snapshot'[Available Quantity] < 'gld_fact_inventory_snapshot'[Safety Stock Quantity]))
+		formatString: #,0
+		lineageTag: 862c9a62-0eb3-454f-aa20-1d793ef3f2ca
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Snapshot Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1127bbf3-a94c-486c-b14d-73a337b7954c
+		sourceLineageTag: snapshot_date
+		summarizeBy: none
+		sourceColumn: snapshot_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 3a3df28e-8c79-4379-b7c0-64636b621ca0
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location ID'
+		dataType: string
+		lineageTag: fbdcc7c5-8c8b-44e9-8028-8407db1e8a54
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'On Hand Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: e0998438-6d8a-4cff-9b78-7f772a123295
+		sourceLineageTag: on_hand_qty
+		summarizeBy: sum
+		sourceColumn: on_hand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Reserved Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bb59222-72d6-4565-96b9-5c5661df434a
+		sourceLineageTag: reserved_qty
+		summarizeBy: sum
+		sourceColumn: reserved_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Available Quantity'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8533d990-78b1-4a1f-84e4-6fd0d0acb203
+		sourceLineageTag: available_qty
+		summarizeBy: sum
+		sourceColumn: available_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Safety Stock Quantity'
+		dataType: int64
+		formatString: #,0
+		lineageTag: df188c24-d2de-499a-a823-63a6db1a7ce9
+		sourceLineageTag: safety_stock_qty
+		summarizeBy: sum
+		sourceColumn: safety_stock_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inventory UOM'
+		dataType: string
+		lineageTag: 52f1d6e4-5c01-4a05-a309-9741e7e00398
+		sourceLineageTag: inventory_uom
+		summarizeBy: none
+		sourceColumn: inventory_uom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_inventory_snapshot = entity
+		mode: directLake
+		source
+			entityName: gld_fact_inventory_snapshot
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

@@ -1,0 +1,134 @@
+table gld_fact_shipment
+	lineageTag: 6f08f5ed-0813-4b93-9b82-e12e5a5f8646
+	sourceLineageTag: [dbo].[gld_fact_shipment]
+
+	measure 'Shipment Count' = DISTINCTCOUNT('gld_fact_shipment'[Shipment ID])
+		formatString: '#,0'
+		lineageTag: be2b86ad-38de-4cfe-834e-59e2346d1313
+
+	measure 'Avg Dispatch Variance Hours' = AVERAGE('gld_fact_shipment'[Dispatch Variance Hours])
+		formatString: '#,0.0'
+		lineageTag: 81eb09b9-d080-4e1a-9b4a-e1ac67d79515
+
+	column 'Shipment ID'
+		dataType: string
+		lineageTag: 120e1d16-079e-4766-90ae-25d6ad960d86
+		sourceLineageTag: shipment_id
+		summarizeBy: none
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 8af4b596-fed7-4c07-a080-e4bf5b18d48d
+		sourceLineageTag: order_id
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 08a0b142-baeb-4836-aa76-d7933bf84197
+		sourceLineageTag: customer_id
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carrier ID'
+		dataType: string
+		lineageTag: 960159d9-9b42-4f6b-bf11-c7dd4371f5ce
+		sourceLineageTag: carrier_id
+		summarizeBy: none
+		sourceColumn: carrier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Route ID'
+		dataType: string
+		lineageTag: 407d2985-47a5-4db6-9870-0aecb776d675
+		sourceLineageTag: route_id
+		summarizeBy: none
+		sourceColumn: route_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Planned Dispatch Timestamp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c997d020-beac-497f-bf64-2bbc24079e0a
+		sourceLineageTag: planned_dispatch_timestamp
+		summarizeBy: none
+		sourceColumn: planned_dispatch_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Dispatch Timestamp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76b0704a-c176-422a-9b03-272d7ed2f5ed
+		sourceLineageTag: actual_dispatch_timestamp
+		summarizeBy: none
+		sourceColumn: actual_dispatch_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requested Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8ef40e5-2bf7-4215-9f56-9f3d1be143c7
+		sourceLineageTag: requested_delivery_date
+		summarizeBy: none
+		sourceColumn: requested_delivery_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipment Status'
+		dataType: string
+		lineageTag: 883aeb88-5a2e-4981-a0dc-7f342efafe2f
+		sourceLineageTag: shipment_status
+		summarizeBy: none
+		sourceColumn: shipment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Weight'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: fa2775dc-74ac-4c9a-b804-04e623cd350a
+		sourceLineageTag: total_weight_value
+		summarizeBy: sum
+		sourceColumn: total_weight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Weight UOM'
+		dataType: string
+		lineageTag: cca5054f-ecc1-46d8-9c94-e27631a5201e
+		sourceLineageTag: weight_uom
+		summarizeBy: none
+		sourceColumn: weight_uom
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dispatch Variance Hours'
+		dataType: double
+		lineageTag: c543ea67-b61d-4377-957b-bff1d6bd4a98
+		sourceLineageTag: dispatch_variance_hours
+		summarizeBy: sum
+		sourceColumn: dispatch_variance_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gld_fact_shipment = entity
+		mode: directLake
+		source
+			entityName: gld_fact_shipment
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

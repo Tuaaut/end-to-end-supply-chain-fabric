@@ -1,0 +1,144 @@
+table gld_fact_purchase_receipt
+	lineageTag: ee2aeea7-4a07-4092-9b6f-6a4339a9b7a9
+	sourceLineageTag: [dbo].[gld_fact_purchase_receipt]
+
+	column 'Receipt ID'
+		dataType: string
+		lineageTag: 6c55e4ae-77ae-468b-aa6a-af96d553fcd3
+		sourceLineageTag: receipt_id
+		summarizeBy: none
+		sourceColumn: receipt_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Order ID'
+		dataType: string
+		lineageTag: 9bb64352-065c-4e36-9426-5278e8c122f0
+		sourceLineageTag: po_id
+		summarizeBy: none
+		sourceColumn: po_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 270ababb-f8c6-4b6f-a31b-86fc4a133820
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location ID'
+		dataType: string
+		lineageTag: 85135d01-7b82-43b8-84c6-f56953d6fd76
+		sourceLineageTag: location_id
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Supplier ID'
+		dataType: string
+		lineageTag: f5e04c32-b105-4791-a07e-d65bf9b9825d
+		sourceLineageTag: supplier_id
+		summarizeBy: none
+		sourceColumn: supplier_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Purchase Order Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d141478e-1e82-4621-b247-33dd2c921aa8
+		sourceLineageTag: po_date
+		summarizeBy: none
+		sourceColumn: po_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Promised Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d571935f-30ff-4183-978b-4a278a15ee8a
+		sourceLineageTag: promised_date
+		summarizeBy: none
+		sourceColumn: promised_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Receipt Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 91a57874-b8b8-4f4c-87a4-bec72035fe4a
+		sourceLineageTag: receipt_date
+		summarizeBy: none
+		sourceColumn: receipt_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Received Quantity'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a81dab6-d208-498c-83f1-d4804c5f75c8
+		sourceLineageTag: received_qty
+		summarizeBy: sum
+		sourceColumn: received_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Received UOM'
+		dataType: string
+		lineageTag: e0d3d285-5a01-45f3-959c-1d6cab018b41
+		sourceLineageTag: received_uom
+		summarizeBy: none
+		sourceColumn: received_uom
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quality Status'
+		dataType: string
+		lineageTag: f1ecf0c3-9027-480c-93b0-156d98aa0ca9
+		sourceLineageTag: quality_status
+		summarizeBy: none
+		sourceColumn: quality_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Cost'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 934645b5-731a-4e3f-8f49-91e2c0bccfa2
+		sourceLineageTag: unit_cost
+		summarizeBy: sum
+		sourceColumn: unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: 1ffab65e-c6d8-44cc-8747-7faa725c7e4c
+		sourceLineageTag: currency_code
+		summarizeBy: none
+		sourceColumn: currency_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Receipt Variance Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 92dc2e75-991f-4161-9e2f-e940f91781c8
+		sourceLineageTag: receipt_variance_days
+		summarizeBy: sum
+		sourceColumn: receipt_variance_days
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_purchase_receipt = entity
+		mode: directLake
+		source
+			entityName: gld_fact_purchase_receipt
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

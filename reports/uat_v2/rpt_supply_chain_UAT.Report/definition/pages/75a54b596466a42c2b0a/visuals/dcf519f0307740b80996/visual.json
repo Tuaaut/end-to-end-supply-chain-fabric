@@ -1,0 +1,115 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "dcf519f0307740b80996",
+    "position": {
+        "x": 605.7142857142858,
+        "y": 322.8571428571429,
+        "z": 8000,
+        "height": 202.85714285714286,
+        "width": 597.1428571428572,
+        "tabOrder": 8000
+    },
+    "visual": {
+        "visualType": "clusteredColumnChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_product"
+                                        }
+                                    },
+                                    "Property": "Category Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_product.Category Name",
+                            "nativeQueryRef": "Category Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_inventory_snapshot"
+                                        }
+                                    },
+                                    "Property": "On Hand Qty"
+                                }
+                            },
+                            "queryRef": "gld_fact_inventory_snapshot.On Hand Qty",
+                            "nativeQueryRef": "On Hand Qty"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_inventory_snapshot"
+                                    }
+                                },
+                                "Property": "On Hand Qty"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "Literal": {
+                                            "Value": "'#D9E2F3'"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        },
+                        "radius": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "2D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}
