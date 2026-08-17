@@ -1,5 +1,9 @@
 # End-to-End Supply Chain Control Tower & Optimization on Microsoft Fabric
 
+> This document records the original scope, structure, and phased plan. For
+> where the project actually stands today, see
+> [CURRENT_STATUS.md](CURRENT_STATUS.md).
+
 ## 1. Project purpose
 
 Build a portfolio project that demonstrates business analysis, supply chain analytics, KPI design, scenario modeling, data engineering, semantic modeling, and executive reporting in one coherent solution.
@@ -271,7 +275,6 @@ The MVP should contain only one deep optimization showcase. The preferred starti
 ## 12. Required deliverables
 
 - Reproducible synthetic-data generator
-- Data dictionary and source-to-target mappings
 - KPI dictionary with definitions and formulas
 - Fabric ingestion/orchestration pipeline
 - Bronze, Silver, and Gold Lakehouse layers
@@ -337,8 +340,12 @@ The MVP should contain only one deep optimization showcase. The preferred starti
 
 Implementation should proceed one phase at a time. Before any billable Fabric capacity is resumed or a capacity-consuming notebook/pipeline is run, confirm cost impact and current capacity choice.
 
-## 16. Starting point for the next ChatGPT App session
+## 16. Starting point for the next session
 
-Use this instruction:
-
-> Read `PROJECT_PLAN.md` completely. We are building the End-to-End Supply Chain Control Tower & Optimization project using Microsoft Fabric and Power BI. Start with Phase 0 only: review and finalize the data contract, table grains, primary keys, foreign keys, KPI definitions, and synthetic-data business rules. Do not create cloud resources or run billable workloads until I approve them.
+Phases 0-4 are complete: both the UAT and PROD paths have passed end-to-end
+validation through Silver, Gold, the Semantic Model, and the Power BI report.
+See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the validated checkpoints and
+[OPERATIONS.md](OPERATIONS.md) for how to run a new batch. Continue from
+Phase 5 (document and publish) unless a specific regression or new phase of
+work is agreed first. As before, do not resume billable Fabric capacity or run
+a capacity-consuming notebook/pipeline without confirming cost impact first.

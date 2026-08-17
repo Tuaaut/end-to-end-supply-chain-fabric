@@ -103,7 +103,6 @@ field rules.
   model, and report conventions.
 - [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md) — source entities and quality
   contract.
-- [LEARNING_PATH.md](LEARNING_PATH.md) — current implementation learning path.
 
 ## Main folders
 
