@@ -1,0 +1,132 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "matrix001",
+    "position": {
+        "x": 16,
+        "y": 600,
+        "z": 4000,
+        "height": 470,
+        "width": 610,
+        "tabOrder": 4000
+    },
+    "visual": {
+        "visualType": "pivotTable",
+        "query": {
+            "queryState": {
+                "Rows": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_route"
+                                        }
+                                    },
+                                    "Property": "Destination Region"
+                                }
+                            },
+                            "queryRef": "gld_dim_route.Destination Region",
+                            "nativeQueryRef": "Destination Region",
+                            "active": true
+                        },
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_carrier"
+                                        }
+                                    },
+                                    "Property": "Carrier Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_carrier.Carrier Name",
+                            "nativeQueryRef": "Carrier Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Values": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Total Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Total Logistics Cost",
+                            "nativeQueryRef": "Total Logistics Cost"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Cost per Order"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Cost per Order",
+                            "nativeQueryRef": "Cost per Order"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Cost per Shipment"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Cost per Shipment",
+                            "nativeQueryRef": "Cost per Shipment"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_logistics_cost"
+                                    }
+                                },
+                                "Property": "Total Logistics Cost"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ]
+            }
+        },
+        "visualContainerObjects": {
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'Cost by Destination Region & Carrier'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

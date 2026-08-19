@@ -1,0 +1,161 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "bar001",
+    "position": {
+        "x": 16,
+        "y": 345,
+        "z": 2000,
+        "height": 245,
+        "width": 610,
+        "tabOrder": 2000
+    },
+    "visual": {
+        "visualType": "clusteredBarChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_customer"
+                                        }
+                                    },
+                                    "Property": "region"
+                                }
+                            },
+                            "queryRef": "gld_dim_customer.region",
+                            "nativeQueryRef": "region",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Total Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Total Logistics Cost",
+                            "nativeQueryRef": "Total Logistics Cost"
+                        }
+                    ]
+                }
+            },
+            "sortDefinition": {
+                "sort": [
+                    {
+                        "field": {
+                            "Measure": {
+                                "Expression": {
+                                    "SourceRef": {
+                                        "Entity": "gld_fact_logistics_cost"
+                                    }
+                                },
+                                "Property": "Total Logistics Cost"
+                            }
+                        },
+                        "direction": "Descending"
+                    }
+                ],
+                "isDefaultSort": true
+            }
+        },
+        "objects": {
+            "dataPoint": [
+                {
+                    "properties": {}
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'Total Logistics Cost by Customer Region'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "nc0009826b0dc04bcd21",
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_dim_customer"
+                            }
+                        },
+                        "Property": "region"
+                    }
+                },
+                "type": "Categorical"
+            },
+            {
+                "name": "nc0010335a906c1e0e4f",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Total Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

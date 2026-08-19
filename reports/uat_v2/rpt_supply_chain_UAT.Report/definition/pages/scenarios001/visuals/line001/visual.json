@@ -1,0 +1,179 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "line001",
+    "position": {
+        "x": 650,
+        "y": 345,
+        "z": 3000,
+        "height": 245,
+        "width": 614,
+        "tabOrder": 3000
+    },
+    "visual": {
+        "visualType": "lineChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_dim_date"
+                                        }
+                                    },
+                                    "Property": "Month Name"
+                                }
+                            },
+                            "queryRef": "gld_dim_date.Month Name",
+                            "nativeQueryRef": "Month Name",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_shipment"
+                                        }
+                                    },
+                                    "Property": "OTIF %"
+                                }
+                            },
+                            "queryRef": "gld_fact_shipment.OTIF %",
+                            "nativeQueryRef": "OTIF %"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_shipment"
+                                        }
+                                    },
+                                    "Property": "Scenario OTIF %"
+                                }
+                            },
+                            "queryRef": "gld_fact_shipment.Scenario OTIF %",
+                            "nativeQueryRef": "Scenario OTIF %"
+                        }
+                    ]
+                }
+            }
+        },
+        "objects": {
+            "labels": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'OTIF % Baseline vs Scenario by Month'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "sc0011eec1b76585597a",
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_dim_date"
+                            }
+                        },
+                        "Property": "Month Name"
+                    }
+                },
+                "type": "Categorical"
+            },
+            {
+                "name": "sc0012ba09db03ce047c",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_shipment"
+                            }
+                        },
+                        "Property": "OTIF %"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc0012ba09db03ce047e",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_shipment"
+                            }
+                        },
+                        "Property": "Scenario OTIF %"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

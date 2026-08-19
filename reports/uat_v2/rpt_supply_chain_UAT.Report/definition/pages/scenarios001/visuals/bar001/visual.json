@@ -1,0 +1,171 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "bar001",
+    "position": {
+        "x": 16,
+        "y": 345,
+        "z": 2000,
+        "height": 245,
+        "width": 610,
+        "tabOrder": 2000
+    },
+    "visual": {
+        "visualType": "clusteredColumnChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Cost Component"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Cost Component",
+                            "nativeQueryRef": "Cost Component",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Total Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Total Logistics Cost",
+                            "nativeQueryRef": "Total Logistics Cost"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Scenario Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Scenario Logistics Cost",
+                            "nativeQueryRef": "Scenario Logistics Cost"
+                        }
+                    ]
+                }
+            }
+        },
+        "objects": {
+            "dataPoint": [
+                {
+                    "properties": {}
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'Baseline vs Scenario Cost by Component'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "sc0009826b0dc04bcd21",
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Cost Component"
+                    }
+                },
+                "type": "Categorical"
+            },
+            {
+                "name": "sc0010335a906c1e0e4f",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Total Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc0010335a906c1e0e50",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Scenario Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

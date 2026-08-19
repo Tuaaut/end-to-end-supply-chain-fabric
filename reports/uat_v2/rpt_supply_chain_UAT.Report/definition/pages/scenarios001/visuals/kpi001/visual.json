@@ -1,0 +1,244 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "kpi001",
+    "position": {
+        "x": 16,
+        "y": 170,
+        "z": 1000,
+        "height": 150,
+        "width": 1248,
+        "tabOrder": 1000
+    },
+    "visual": {
+        "visualType": "cardVisual",
+        "query": {
+            "queryState": {
+                "Data": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Total Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Total Logistics Cost",
+                            "nativeQueryRef": "Total Logistics Cost"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Scenario Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Scenario Logistics Cost",
+                            "nativeQueryRef": "Scenario Logistics Cost"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Logistics Cost Savings"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Logistics Cost Savings",
+                            "nativeQueryRef": "Logistics Cost Savings"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_shipment"
+                                        }
+                                    },
+                                    "Property": "OTIF %"
+                                }
+                            },
+                            "queryRef": "gld_fact_shipment.OTIF %",
+                            "nativeQueryRef": "OTIF %"
+                        },
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_shipment"
+                                        }
+                                    },
+                                    "Property": "Scenario OTIF %"
+                                }
+                            },
+                            "queryRef": "gld_fact_shipment.Scenario OTIF %",
+                            "nativeQueryRef": "Scenario OTIF %"
+                        }
+                    ]
+                }
+            }
+        },
+        "objects": {
+            "label": [
+                {
+                    "properties": {
+                        "fontSize": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "10D"
+                                }
+                            }
+                        },
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "properties": {
+                        "fontSize": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "24D"
+                                }
+                            }
+                        },
+                        "horizontalAlignment": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'center'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "sc004a715e19280a05b",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Total Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc0051708a02bb8d1a2",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Scenario Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc006eb3592725917b3",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Logistics Cost Savings"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc0070263a6806e13c4",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_shipment"
+                            }
+                        },
+                        "Property": "OTIF %"
+                    }
+                },
+                "type": "Advanced"
+            },
+            {
+                "name": "sc00891bc7c08710d5",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_shipment"
+                            }
+                        },
+                        "Property": "Scenario OTIF %"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}

@@ -1,0 +1,154 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "recommendations001",
+    "position": {
+        "x": 650,
+        "y": 600,
+        "z": 5000,
+        "height": 470,
+        "width": 614,
+        "tabOrder": 5000
+    },
+    "visual": {
+        "visualType": "textbox",
+        "objects": {
+            "general": [
+                {
+                    "properties": {
+                        "paragraphs": [
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": "Recommended Actions",
+                                        "textStyle": {
+                                            "fontWeight": "bold",
+                                            "fontSize": "16pt",
+                                            "color": "#12355B"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": " ",
+                                        "textStyle": {
+                                            "fontSize": "6pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": "1. Target carrier consolidation — negotiate volume-based freight rates with the highest-cost carriers in the table (left) before adding capacity elsewhere.",
+                                        "textStyle": {
+                                            "fontSize": "11pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": " ",
+                                        "textStyle": {
+                                            "fontSize": "6pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": "2. Close the OTIF gap — prioritize dispatch-time fixes for carriers below the fleet average OTIF % before committing to a service-level target.",
+                                        "textStyle": {
+                                            "fontSize": "11pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": " ",
+                                        "textStyle": {
+                                            "fontSize": "6pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": "3. Balance the two targets — use the sliders above to test how much cost savings the network can absorb before it conflicts with the OTIF improvement goal; evaluate both scenarios together, not independently.",
+                                        "textStyle": {
+                                            "fontSize": "11pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": " ",
+                                        "textStyle": {
+                                            "fontSize": "10pt"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "textRuns": [
+                                    {
+                                        "value": "Implementation considerations: these are directional planning scenarios, not committed cost reductions. Actual savings depend on carrier contract terms and lead time — validate any target against live carrier negotiations before finalizing the routing plan.",
+                                        "textStyle": {
+                                            "fontStyle": "italic",
+                                            "fontSize": "10pt",
+                                            "color": "#666666"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    }
+}

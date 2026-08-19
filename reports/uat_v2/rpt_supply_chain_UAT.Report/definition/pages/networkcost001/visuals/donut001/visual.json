@@ -1,0 +1,143 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+    "name": "donut001",
+    "position": {
+        "x": 650,
+        "y": 600,
+        "z": 5000,
+        "height": 470,
+        "width": 614,
+        "tabOrder": 5000
+    },
+    "visual": {
+        "visualType": "donutChart",
+        "query": {
+            "queryState": {
+                "Category": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Column": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Cost Component"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Cost Component",
+                            "nativeQueryRef": "Cost Component",
+                            "active": true
+                        }
+                    ]
+                },
+                "Y": {
+                    "projections": [
+                        {
+                            "field": {
+                                "Measure": {
+                                    "Expression": {
+                                        "SourceRef": {
+                                            "Entity": "gld_fact_logistics_cost"
+                                        }
+                                    },
+                                    "Property": "Total Logistics Cost"
+                                }
+                            },
+                            "queryRef": "gld_fact_logistics_cost.Total Logistics Cost",
+                            "nativeQueryRef": "Total Logistics Cost"
+                        }
+                    ]
+                }
+            }
+        },
+        "objects": {
+            "dataPoint": [
+                {
+                    "properties": {}
+                }
+            ]
+        },
+        "visualContainerObjects": {
+            "title": [
+                {
+                    "properties": {
+                        "text": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "'Cost Breakdown by Component'"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "border": [
+                {
+                    "properties": {
+                        "show": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "true"
+                                }
+                            }
+                        },
+                        "color": {
+                            "solid": {
+                                "color": {
+                                    "expr": {
+                                        "ThemeDataColor": {
+                                            "ColorId": 0,
+                                            "Percent": -0.2
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "width": {
+                            "expr": {
+                                "Literal": {
+                                    "Value": "3D"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "drillFilterOtherVisuals": true
+    },
+    "filterConfig": {
+        "filters": [
+            {
+                "name": "nc0013374006b417a201",
+                "field": {
+                    "Column": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Cost Component"
+                    }
+                },
+                "type": "Categorical"
+            },
+            {
+                "name": "nc0014052450c7c6bb22",
+                "field": {
+                    "Measure": {
+                        "Expression": {
+                            "SourceRef": {
+                                "Entity": "gld_fact_logistics_cost"
+                            }
+                        },
+                        "Property": "Total Logistics Cost"
+                    }
+                },
+                "type": "Advanced"
+            }
+        ]
+    }
+}
