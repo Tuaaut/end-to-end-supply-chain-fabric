@@ -222,7 +222,7 @@ try:
             .when(F.col("_location_id").isNull(), "UNRESOLVED_LOCATION_ID")
             .when(F.col("forecast_version").isNull(), "MISSING_FORECAST_VERSION")
             .when(F.col("forecast_qty").isNull() | (F.col("forecast_qty") < 0), "INVALID_FORECAST_QTY")
-            .when(F.col("actual_demand_qty").isNull() | (F.col("actual_demand_qty") < 0), "INVALID_ACTUAL_DEMAND_QTY")
+            .when(F.col("actual_demand_qty").isNotNull() & (F.col("actual_demand_qty") < 0), "INVALID_ACTUAL_DEMAND_QTY")
             .when(~F.col("demand_uom").isin("EA", "EACH"), "INVALID_DEMAND_UOM"),
         )
         .withColumn("forecast_error_qty", F.col("actual_demand_qty") - F.col("forecast_qty"))

@@ -109,6 +109,9 @@ DQ_TABLE_RULES = [
     ("slv_sales_order", ["order_id"], ["order_id", "customer_id"]),
     ("slv_sales_order_line", ["order_id", "order_line_no"], ["order_id", "order_line_no", "product_id", "fulfillment_location_id"]),
     ("slv_shipment", ["shipment_id"], ["shipment_id", "order_id", "carrier_id", "route_id"]),
+    ("slv_delivery_event", ["delivery_event_id"], ["delivery_event_id", "shipment_id"]),
+    ("slv_logistics_cost", ["cost_id"], ["cost_id", "shipment_id", "order_id"]),
+    ("slv_disruption", ["disruption_id"], ["disruption_id"]),
 ]
 
 # (child table, child foreign key, parent table, parent key)
@@ -131,6 +134,7 @@ DQ_REFERENTIAL_RULES = [
     ("slv_shipment", "order_id", "slv_sales_order", "order_id"),
     ("slv_shipment", "carrier_id", "slv_carrier", "carrier_id"),
     ("slv_shipment", "route_id", "slv_route", "route_id"),
+    ("slv_logistics_cost", "order_id", "slv_sales_order", "order_id"),
 ]
 
 
@@ -244,7 +248,7 @@ def run_centralized_dq_gate():
             failures.append(f"{child_table}.{child_key}: orphan keys")
 
     total_checks = len(dq_rows)
-    failed_checks = sum(1 for row in dq_rows if row[5] == "FAIL")
+    failed_checks = sum(1 for row in dq_rows if row[6] == "FAIL")
     dq_score = 100.0 if total_checks == 0 else round(100.0 * (total_checks - failed_checks) / total_checks, 2)
     append_dq_result(dq_rows, "__pipeline__", "dq_score", "INFO", "PASS" if not failures else "FAIL", dq_score, 100, 100, f"{failed_checks} failed checks out of {total_checks}")
 
@@ -279,6 +283,9 @@ try:
         "slv_sales_order": "requested_delivery_date",
         "slv_purchase_order_receipt": "receipt_timestamp",
         "slv_shipment": "planned_dispatch_timestamp",
+        "slv_delivery_event": "event_timestamp",
+        "slv_logistics_cost": "posting_date",
+        "slv_disruption": "start_date",
     }
     source_frames = []
     for table_name, column_name in date_columns.items():

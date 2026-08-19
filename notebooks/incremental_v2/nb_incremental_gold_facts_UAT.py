@@ -114,6 +114,21 @@ try:
     df = shipments.join(orders, "order_id", "left").withColumn("dispatch_variance_hours", (F.col("actual_dispatch_timestamp").cast("long") - F.col("planned_dispatch_timestamp").cast("long")) / F.lit(3600.0)).select("shipment_id", "order_id", "customer_id", "carrier_id", "route_id", "planned_dispatch_timestamp", "actual_dispatch_timestamp", "requested_delivery_date", "shipment_status", "total_weight_value", "weight_uom", "dispatch_variance_hours")
     merge_delta(df, "gld_fact_shipment", ["shipment_id"])
     print("gld_fact_shipment written")
+
+    # --- inlined from nb_gld_fact_delivery_event.py ---
+    df = valid_source("slv_delivery_event").select("delivery_event_id", "shipment_id", "event_sequence", "event_type", "event_timestamp", "event_location", "proof_of_delivery_flag")
+    merge_delta(df, "gld_fact_delivery_event", ["delivery_event_id"])
+    print("gld_fact_delivery_event written")
+
+    # --- inlined from nb_gld_fact_logistics_cost.py ---
+    df = valid_source("slv_logistics_cost").select("cost_id", "shipment_id", "order_id", "cost_component", "amount", "currency_code", "posting_date")
+    merge_delta(df, "gld_fact_logistics_cost", ["cost_id"])
+    print("gld_fact_logistics_cost written")
+
+    # --- inlined from nb_gld_fact_disruption_event.py ---
+    df = valid_source("slv_disruption").select("disruption_id", "scope_type", "scope_id", "event_type", "start_date", "end_date", "severity", "delay_multiplier")
+    merge_delta(df, "gld_fact_disruption_event", ["disruption_id"])
+    print("gld_fact_disruption_event written")
     watermark_schema = T.StructType([T.StructField("process_name", T.StringType(), False), T.StructField("last_success_at", T.TimestampType(), False)])
     if not spark.catalog.tableExists("ops_incremental_watermark"):
         spark.createDataFrame([], watermark_schema).write.format("delta").saveAsTable("ops_incremental_watermark")

@@ -34,6 +34,22 @@ def delta_target_committed(table_name):
 if not delta_target_committed(TARGET_TABLE):
     spark.sql(f"DROP TABLE IF EXISTS `{TARGET_TABLE}`")
 
+if spark.catalog.tableExists(TARGET_TABLE) and "dq_status" in spark.table(TARGET_TABLE).columns:
+    # dq_status/dq_reason were added to this table after it already had rows.
+    # Delta schema evolution leaves pre-existing rows null for a new column,
+    # not 'VALID' -- backfill once so valid_source() doesn't silently drop
+    # every historical supplier from Gold's joins.
+    spark.sql(f"""
+        UPDATE `{TARGET_TABLE}`
+        SET dq_status = CASE WHEN supplier_id IS NOT NULL AND supplier_name IS NOT NULL THEN 'VALID' ELSE 'QUARANTINED' END,
+            dq_reason = CASE
+                WHEN supplier_id IS NULL THEN 'INVALID_SUPPLIER_ID'
+                WHEN supplier_name IS NULL THEN 'MISSING_SUPPLIER_NAME'
+                ELSE NULL
+            END
+        WHERE dq_status IS NULL
+    """)
+
 suppliers_raw = (
     spark.read.option("header", True)
     .option("inferSchema", False)
@@ -59,7 +75,12 @@ suppliers = (
             F.to_timestamp("source_updated_at", "yyyy/MM/dd HH:mm:ss"),
         ),
     )
-    .filter(F.col("supplier_id").isNotNull() & F.col("supplier_name").isNotNull())
+    .withColumn(
+        "dq_reason",
+        F.when(F.col("supplier_id").isNull(), "INVALID_SUPPLIER_ID")
+        .when(F.col("supplier_name").isNull(), "MISSING_SUPPLIER_NAME"),
+    )
+    .withColumn("dq_status", F.when(F.col("dq_reason").isNull(), "VALID").otherwise("QUARANTINED"))
 )
 
 latest_window = Window.partitionBy("supplier_id").orderBy(
@@ -73,6 +94,9 @@ if spark.catalog.tableExists(TARGET_TABLE):
     if incoming.limit(1).count() == 0:
         print(f"NO_CHANGES {TARGET_TABLE} at {datetime.now(timezone.utc).isoformat()}")
     else:
+        # dq_status/dq_reason are new columns on an already-live table; allow
+        # the merge to add them instead of failing on schema mismatch.
+        spark.conf.set("spark.databricks.delta.schema.autoMerge.enabled", "true")
         DeltaTable.forName(spark, TARGET_TABLE).alias("t").merge(
             incoming.dropDuplicates(["supplier_id"]).alias("s"),
             "t.`supplier_id` <=> s.`supplier_id`",

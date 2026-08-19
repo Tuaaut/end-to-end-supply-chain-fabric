@@ -121,7 +121,6 @@ dq_reason = F.when(dq_reason.isNull() & F.col("is_active").isNull(), "INVALID_AC
 slv_product = (
     checked.withColumn("dq_reason", dq_reason)
     .withColumn("dq_status", F.when(F.col("dq_reason").isNull(), "VALID").otherwise("QUARANTINED"))
-    .filter(F.col("dq_status") == "VALID")
     .select(
         "product_id", "product_name",
         F.initcap(F.lower("category_key")).alias("category_name"),
