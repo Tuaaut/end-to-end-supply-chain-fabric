@@ -1,0 +1,92 @@
+table gld_fact_disruption_event
+	lineageTag: 0d88008c-e44b-421f-97f2-e9bfdd67eb05
+	sourceLineageTag: [dbo].[gld_fact_disruption_event]
+
+	measure 'Disruption Count' = COUNTROWS('gld_fact_disruption_event')
+		formatString: 0,0
+		lineageTag: 9332f8da-f7fb-4042-bc21-14a5960b2e4f
+
+	measure 'High Severity Disruption Count' = CALCULATE(COUNTROWS('gld_fact_disruption_event'), 'gld_fact_disruption_event'[Severity] IN {"HIGH", "CRITICAL"})
+		formatString: 0,0
+		lineageTag: 2a536475-8a9b-4089-1a25-3647589ba0ac
+
+	column 'Disruption ID'
+		dataType: string
+		lineageTag: a784a4db-22a3-4111-9335-5ec8eb2bce53
+		sourceLineageTag: disruption_id
+		summarizeBy: none
+		sourceColumn: disruption_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scope Type'
+		dataType: string
+		lineageTag: 3d36413f-00a8-4b55-a0e2-0cee7eebf875
+		sourceLineageTag: scope_type
+		summarizeBy: none
+		sourceColumn: scope_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scope ID'
+		dataType: string
+		lineageTag: b07c6843-5066-4671-aa5e-78dd2ed18e1f
+		sourceLineageTag: scope_id
+		summarizeBy: none
+		sourceColumn: scope_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Type'
+		dataType: string
+		lineageTag: ef2c2b93-938f-4625-a461-d2be59be1717
+		sourceLineageTag: event_type
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0f5a69f6-ed6c-4f89-b688-514cb8a580c9
+		sourceLineageTag: start_date
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2c4d95d3-204c-43d1-9cd6-c736203fe54e
+		sourceLineageTag: end_date
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Severity
+		dataType: string
+		lineageTag: 1c488f50-7565-4482-9b9e-d61a4d8fd957
+		sourceLineageTag: severity
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delay Multiplier'
+		dataType: double
+		lineageTag: 96b681da-b287-4e83-80e0-f9f32098e99b
+		sourceLineageTag: delay_multiplier
+		summarizeBy: none
+		sourceColumn: delay_multiplier
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_disruption_event = entity
+		mode: directLake
+		source
+			entityName: gld_fact_disruption_event
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

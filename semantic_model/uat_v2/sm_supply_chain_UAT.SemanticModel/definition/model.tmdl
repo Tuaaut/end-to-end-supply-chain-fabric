@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_QueryOrder = ["DirectLake - lh_supply_chain_UAT"]
 
-annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","TMDLView_Desktop"]
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","TMDLView_Desktop","DaxQueryView_Desktop"]
 
 ref table gld_fact_shipment
 ref table gld_dim_customer
@@ -28,3 +28,9 @@ ref table ops_data_quality_summary
 ref table ops_pipeline_run_log
 ref table ops_incremental_file_watermark
 ref table ops_gold_input_watermark
+ref table gld_fact_delivery_event
+ref table gld_fact_logistics_cost
+ref table gld_fact_disruption_event
+ref table 'Cost Savings Target %'
+ref table 'OTIF Improvement Target %'
+

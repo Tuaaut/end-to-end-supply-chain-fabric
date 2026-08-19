@@ -1,0 +1,79 @@
+table gld_fact_delivery_event
+	lineageTag: c4dc8f60-000c-4ae7-a2cf-49b84392f24a
+	sourceLineageTag: [dbo].[gld_fact_delivery_event]
+
+	measure 'Delivery Event Count' = COUNTROWS('gld_fact_delivery_event')
+		formatString: 0,0
+		lineageTag: 56992727-0412-42b9-8f32-b1525ab9f645
+
+	column 'Delivery Event ID'
+		dataType: string
+		lineageTag: 5be74b53-2b25-47ca-9f58-e60c694b56eb
+		sourceLineageTag: delivery_event_id
+		summarizeBy: none
+		sourceColumn: delivery_event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipment ID'
+		dataType: string
+		lineageTag: bb0f3836-8513-4e58-8df8-52c9f3564083
+		sourceLineageTag: shipment_id
+		summarizeBy: none
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Sequence'
+		dataType: int64
+		formatString: 0
+		lineageTag: a6c74786-d761-497a-933e-90a0a5f19e48
+		sourceLineageTag: event_sequence
+		summarizeBy: none
+		sourceColumn: event_sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Type'
+		dataType: string
+		lineageTag: 91dd0e51-81b4-4326-8d15-aa9b805102d4
+		sourceLineageTag: event_type
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Timestamp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dd79683b-a690-437e-9467-ed859cf53696
+		sourceLineageTag: event_timestamp
+		summarizeBy: none
+		sourceColumn: event_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Location'
+		dataType: string
+		lineageTag: 9cc5ba15-dcf3-4a4f-a1b4-454ad05e288a
+		sourceLineageTag: event_location
+		summarizeBy: none
+		sourceColumn: event_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proof Of Delivery Flag'
+		dataType: boolean
+		lineageTag: 374fcaf7-f8a2-47ea-9181-2d8018a33cc5
+		sourceLineageTag: proof_of_delivery_flag
+		summarizeBy: none
+		sourceColumn: proof_of_delivery_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_delivery_event = entity
+		mode: directLake
+		source
+			entityName: gld_fact_delivery_event
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

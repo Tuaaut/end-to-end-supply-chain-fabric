@@ -4,14 +4,18 @@ table ops_pipeline_run_log
 
 	measure 'Pipeline Log Rows' = COUNTROWS('ops_pipeline_run_log')
 		formatString: #,0
+		lineageTag: 2dbd841c-dc75-4c46-9bc2-06cb6f72331c
 
 	measure 'Last Successful Pipeline Run' = CALCULATE(MAX('ops_pipeline_run_log'[Ended At]), 'ops_pipeline_run_log'[Status] = "SUCCESS")
 		formatString: dd MMM HH:mm
+		lineageTag: 81c33d92-9a3d-4a16-bf4d-81a3f1e9aa72
 
 	measure 'Latest Pipeline Status' = VAR LatestEnd = CALCULATE(MAX('ops_pipeline_run_log'[Ended At]), ALL('ops_pipeline_run_log')) RETURN CALCULATE(MAX('ops_pipeline_run_log'[Status]), 'ops_pipeline_run_log'[Ended At] = LatestEnd)
+		lineageTag: 3e5469a6-c5c8-4c43-95e2-cf24d4153321
 
 	measure 'Latest Gold Input Watermark' = MAX('ops_gold_input_watermark'[Silver Watermark])
 		formatString: dd MMM HH:mm
+		lineageTag: 87c8c523-afe1-4b47-99f2-fd3a688718ae
 
 	column 'Pipeline Run ID'
 		dataType: string

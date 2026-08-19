@@ -4,6 +4,7 @@ table ops_incremental_file_watermark
 
 	measure 'Latest Bronze File Watermark' = MAX('ops_incremental_file_watermark'[Last File Modified At])
 		formatString: dd MMM HH:mm
+		lineageTag: 307b614d-05bf-4cf7-8bc8-b052ffd9ff89
 
 	column 'Process Name'
 		dataType: string

@@ -70,3 +70,15 @@ relationship 5e7d344e-6c61-ad0a-783d-b8d3f794c802
 	fromColumn: gld_fact_shipment.'Requested Delivery Date'
 	toColumn: gld_dim_date.'Date Key'
 
+relationship 945e935a-91b5-46bf-891a-794a9263c9f3
+	fromColumn: gld_fact_delivery_event.'Shipment ID'
+	toColumn: gld_fact_shipment.'Shipment ID'
+
+relationship 340abe74-12f8-4a17-aa04-46b59f56d094
+	fromColumn: gld_fact_logistics_cost.'Shipment ID'
+	toColumn: gld_fact_shipment.'Shipment ID'
+
+relationship 666d847a-c37d-44c3-9162-27146420b4b0
+	fromColumn: gld_fact_disruption_event.'Start Date'
+	toColumn: gld_dim_date.'Date Key'
+

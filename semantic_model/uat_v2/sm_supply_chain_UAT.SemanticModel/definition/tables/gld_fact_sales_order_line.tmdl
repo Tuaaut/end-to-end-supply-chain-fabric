@@ -32,6 +32,7 @@ table gld_fact_sales_order_line
 
 	measure 'Sales Order Line Count' = COUNTROWS('gld_fact_sales_order_line')
 		formatString: #,0
+		lineageTag: c8fccb68-490d-439a-aa9f-e72fc9334c91
 
 	column 'Order ID'
 		dataType: string

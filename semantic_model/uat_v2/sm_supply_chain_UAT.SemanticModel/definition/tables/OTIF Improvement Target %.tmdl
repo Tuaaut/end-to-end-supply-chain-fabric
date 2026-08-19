@@ -1,0 +1,24 @@
+table 'OTIF Improvement Target %'
+	isHidden
+	lineageTag: e24553cb-62c3-4604-9a3f-e2baf5ede573
+
+	measure 'OTIF Improvement Target % Value' = SELECTEDVALUE('OTIF Improvement Target %'[OTIF Improvement Target %], 0)
+		formatString: 0%
+		lineageTag: f1b759ea-d208-440a-bff1-053945847867
+
+	column 'OTIF Improvement Target %'
+		dataType: double
+		isHidden
+		formatString: 0%
+		lineageTag: 0a1d8322-1ad9-486e-be93-ca1a66b43b02
+		summarizeBy: sum
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'OTIF Improvement Target %' = calculated
+		mode: import
+		source = GENERATESERIES(0, 0.151, 0.01)
+
+	annotation PBI_Id = 0568d44c-6811-4967-83c2-b8160611a5d0
+

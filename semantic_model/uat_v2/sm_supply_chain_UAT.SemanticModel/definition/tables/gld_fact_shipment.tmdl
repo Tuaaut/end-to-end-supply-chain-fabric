@@ -3,12 +3,74 @@ table gld_fact_shipment
 	sourceLineageTag: [dbo].[gld_fact_shipment]
 
 	measure 'Shipment Count' = DISTINCTCOUNT('gld_fact_shipment'[Shipment ID])
-		formatString: '#,0'
+		formatString: 0,0
 		lineageTag: be2b86ad-38de-4cfe-834e-59e2346d1313
 
 	measure 'Avg Dispatch Variance Hours' = AVERAGE('gld_fact_shipment'[Dispatch Variance Hours])
 		formatString: '#,0.0'
 		lineageTag: 81eb09b9-d080-4e1a-9b4a-e1ac67d79515
+
+	measure 'On-Time Dispatch %' =
+			VAR Dispatched =
+			    CALCULATE(COUNTROWS('gld_fact_shipment'), NOT ISBLANK('gld_fact_shipment'[Actual Dispatch Timestamp]))
+			VAR OnTime =
+			    CALCULATE(COUNTROWS('gld_fact_shipment'), 'gld_fact_shipment'[Actual Dispatch Timestamp] <= 'gld_fact_shipment'[Planned Dispatch Timestamp])
+			RETURN
+			    DIVIDE(OnTime, Dispatched)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: f3a1c2d4-5b6e-4f70-8a91-2c3d4e5f6a7b
+
+	measure 'OTIF %' =
+			VAR DeliveredShipments =
+			    FILTER(
+			        'gld_fact_shipment',
+			        CALCULATE(COUNTROWS('gld_fact_delivery_event'), 'gld_fact_delivery_event'[Event Type] = "DELIVERED") > 0
+			    )
+			VAR OnTimeShipments =
+			    FILTER(
+			        DeliveredShipments,
+			        VAR DeliveredTs =
+			            CALCULATE(MAX('gld_fact_delivery_event'[Event Timestamp]), 'gld_fact_delivery_event'[Event Type] = "DELIVERED")
+			        RETURN
+			            DeliveredTs <= 'gld_fact_shipment'[Requested Delivery Date]
+			    )
+			RETURN
+			    DIVIDE(COUNTROWS(OnTimeShipments), COUNTROWS(DeliveredShipments))
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a2b3c4d5-6e7f-4801-9a12-3b4c5d6e7f80
+
+	measure 'Avg Delivery Delay Days' =
+			AVERAGEX(
+			    FILTER(
+			        'gld_fact_shipment',
+			        CALCULATE(COUNTROWS('gld_fact_delivery_event'), 'gld_fact_delivery_event'[Event Type] = "DELIVERED") > 0
+			    ),
+			    VAR DeliveredTs =
+			        CALCULATE(MAX('gld_fact_delivery_event'[Event Timestamp]), 'gld_fact_delivery_event'[Event Type] = "DELIVERED")
+			    RETURN
+			        DATEDIFF('gld_fact_shipment'[Requested Delivery Date], DeliveredTs, DAY)
+			)
+		formatString: 0.0
+		lineageTag: b3c4d5e6-7f80-4912-ab23-4c5d6e7f8091
+
+	measure 'Avg Actual Transit Days' =
+			AVERAGEX(
+			    FILTER(
+			        'gld_fact_shipment',
+			        NOT ISBLANK('gld_fact_shipment'[Actual Dispatch Timestamp])
+			        && CALCULATE(COUNTROWS('gld_fact_delivery_event'), 'gld_fact_delivery_event'[Event Type] = "DELIVERED") > 0
+			    ),
+			    VAR DeliveredTs =
+			        CALCULATE(MAX('gld_fact_delivery_event'[Event Timestamp]), 'gld_fact_delivery_event'[Event Type] = "DELIVERED")
+			    RETURN
+			        DATEDIFF('gld_fact_shipment'[Actual Dispatch Timestamp], DeliveredTs, DAY)
+			)
+		formatString: 0.0
+		lineageTag: c4d5e6f7-8091-4a23-bc34-5d6e7f809142
+
+	measure 'Scenario OTIF %' = MIN(1, [OTIF %] + 'OTIF Improvement Target %'[OTIF Improvement Target % Value])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 96f8af25-cb49-4f05-86d9-82bc98b91e8a
 
 	column 'Shipment ID'
 		dataType: string

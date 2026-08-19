@@ -1,0 +1,108 @@
+table gld_fact_logistics_cost
+	lineageTag: 51660b0a-ff17-4c58-94d6-1d3dd4b0e40c
+	sourceLineageTag: [dbo].[gld_fact_logistics_cost]
+
+	measure 'Total Logistics Cost' = SUM('gld_fact_logistics_cost'[Amount])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3c96d1f4-1f1b-4ae0-a840-4691f0f07b48
+
+	measure 'Freight Cost' = CALCULATE(SUM('gld_fact_logistics_cost'[Amount]), 'gld_fact_logistics_cost'[Cost Component] = "FREIGHT")
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d5e6f708-9142-4b34-cd45-6e7f80914253
+
+	measure 'Fuel Surcharge Cost' = CALCULATE(SUM('gld_fact_logistics_cost'[Amount]), 'gld_fact_logistics_cost'[Cost Component] = "FUEL_SURCHARGE")
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e6f70891-4253-4c45-de56-7f8091425364
+
+	measure 'Warehouse Handling Cost' = CALCULATE(SUM('gld_fact_logistics_cost'[Amount]), 'gld_fact_logistics_cost'[Cost Component] = "WAREHOUSE_HANDLING")
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f7089142-5364-4d56-ef67-809142536475
+
+	measure 'Cost per Order' = DIVIDE([Total Logistics Cost], DISTINCTCOUNT('gld_fact_logistics_cost'[Order ID]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 08914253-6475-4e67-f078-91425364758a
+
+	measure 'Cost per Shipment' = DIVIDE([Total Logistics Cost], DISTINCTCOUNT('gld_fact_logistics_cost'[Shipment ID]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 19425364-758a-4f78-0189-425364758a9b
+
+	measure 'Scenario Logistics Cost' = [Total Logistics Cost] * (1 - 'Cost Savings Target %'[Cost Savings Target % Value])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 33457f1f-bd72-46a9-82ce-ea6a29626746
+
+	measure 'Logistics Cost Savings' = [Total Logistics Cost] - [Scenario Logistics Cost]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 15b45c20-63e3-4f90-a949-1c2f575522ec
+
+	column 'Cost ID'
+		dataType: string
+		lineageTag: 803f11bf-0e9f-4b28-ad88-d7e22c88219b
+		sourceLineageTag: cost_id
+		summarizeBy: none
+		sourceColumn: cost_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipment ID'
+		dataType: string
+		lineageTag: 9e50315a-f361-4cb0-ade6-2d6b2e366c51
+		sourceLineageTag: shipment_id
+		summarizeBy: none
+		sourceColumn: shipment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 68aaf819-4f8e-4301-9fb2-eaa3264bf25f
+		sourceLineageTag: order_id
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Component'
+		dataType: string
+		lineageTag: 9fec7daa-7821-458e-9205-3e091b24c9d0
+		sourceLineageTag: cost_component
+		summarizeBy: none
+		sourceColumn: cost_component
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: decimal
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 0a8c191a-c188-4054-afd7-e814bf106bc4
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: 2cd23a5e-9373-4b18-9ece-f4cb65b7795c
+		sourceLineageTag: currency_code
+		summarizeBy: none
+		sourceColumn: currency_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posting Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3cdcdc71-f1b9-4ca6-aed9-628ff94eb5fd
+		sourceLineageTag: posting_date
+		summarizeBy: none
+		sourceColumn: posting_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gld_fact_logistics_cost = entity
+		mode: directLake
+		source
+			entityName: gld_fact_logistics_cost
+			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+

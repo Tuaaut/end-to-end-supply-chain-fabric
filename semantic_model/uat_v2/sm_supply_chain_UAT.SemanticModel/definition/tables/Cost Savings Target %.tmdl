@@ -1,0 +1,24 @@
+table 'Cost Savings Target %'
+	isHidden
+	lineageTag: b83880ad-0965-477e-b553-b83b4993fc60
+
+	measure 'Cost Savings Target % Value' = SELECTEDVALUE('Cost Savings Target %'[Cost Savings Target %], 0)
+		formatString: 0%
+		lineageTag: 8adb66a2-8eff-49dd-b226-431d33b43e73
+
+	column 'Cost Savings Target %'
+		dataType: double
+		isHidden
+		formatString: 0%
+		lineageTag: 20e33ae7-a879-4a8b-9ae9-698bca9027f0
+		summarizeBy: sum
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Cost Savings Target %' = calculated
+		mode: import
+		source = GENERATESERIES(0, 0.201, 0.01)
+
+	annotation PBI_Id = d65dc614-cd69-4fb5-8c45-9408a32368b3
+

@@ -4,23 +4,30 @@ table ops_data_quality_summary
 
 	measure 'DQ Score' = CALCULATE(MAX('ops_data_quality_summary'[Actual Value]), 'ops_data_quality_summary'[Table Name] = "__pipeline__", 'ops_data_quality_summary'[Check Name] = "dq_score")
 		formatString: 0.0
+		lineageTag: 3cc3a62f-cc2c-4d80-bd3d-9a615e68d90e
 
 	measure 'Latest DQ Check' = MAX('ops_data_quality_summary'[Checked At])
 		formatString: dd MMM HH:mm
+		lineageTag: 3b2aad8a-68be-4361-ba83-d7aa40cdbdcd
 
 	measure 'Failed Checks' = CALCULATE(COUNTROWS('ops_data_quality_summary'), 'ops_data_quality_summary'[Status] = "FAIL", 'ops_data_quality_summary'[Table Name] <> "__pipeline__")
 		formatString: #,0
+		lineageTag: 794c7127-8d50-49b1-8267-a9c1c07745e2
 
 	measure 'Warning Checks' = CALCULATE(COUNTROWS('ops_data_quality_summary'), 'ops_data_quality_summary'[Status] = "WARNING", 'ops_data_quality_summary'[Table Name] <> "__pipeline__")
 		formatString: #,0
+		lineageTag: 2a1aa021-aa7c-44f7-99c4-8dc4f39f5035
 
 	measure 'Quarantined Rows' = CALCULATE(SUM('ops_data_quality_summary'[Actual Value]), 'ops_data_quality_summary'[Check Name] = "quarantined_rows")
 		formatString: #,0
+		lineageTag: 0f041849-a672-4e8d-ac5e-15ff29800762
 
 	measure 'Checks Evaluated' = CALCULATE(COUNTROWS('ops_data_quality_summary'), 'ops_data_quality_summary'[Table Name] <> "__pipeline__")
 		formatString: #,0
+		lineageTag: 3124363e-ee29-41e9-bdd7-bc1d99854e10
 
 	measure 'Latest DQ Status' = VAR LatestCheck = CALCULATE(MAX('ops_data_quality_summary'[Checked At]), ALL('ops_data_quality_summary')) VAR FailedCount = CALCULATE(COUNTROWS('ops_data_quality_summary'), 'ops_data_quality_summary'[Checked At] = LatestCheck, 'ops_data_quality_summary'[Status] = "FAIL") VAR WarningCount = CALCULATE(COUNTROWS('ops_data_quality_summary'), 'ops_data_quality_summary'[Checked At] = LatestCheck, 'ops_data_quality_summary'[Status] = "WARNING") RETURN IF(FailedCount > 0, "FAIL", IF(WarningCount > 0, "WARNING", "PASS"))
+		lineageTag: 8b0871c9-07d5-4949-af5f-d809b8fec698
 
 	column 'Run ID'
 		dataType: string

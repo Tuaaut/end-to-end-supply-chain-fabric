@@ -53,3 +53,4 @@ table gld_dim_supplier
 		source
 			entityName: gld_dim_supplier
 			expressionSource: 'DirectLake - lh_supply_chain_UAT'
+
