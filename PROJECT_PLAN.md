@@ -345,7 +345,34 @@ Implementation should proceed one phase at a time. Before any billable Fabric ca
 Phases 0-4 are complete: both the UAT and PROD paths have passed end-to-end
 validation through Silver, Gold, the Semantic Model, and the Power BI report.
 See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the validated checkpoints and
-[OPERATIONS.md](OPERATIONS.md) for how to run a new batch. Continue from
-Phase 5 (document and publish) unless a specific regression or new phase of
-work is agreed first. As before, do not resume billable Fabric capacity or run
-a capacity-consuming notebook/pipeline without confirming cost impact first.
+[OPERATIONS.md](OPERATIONS.md) for how to run a new batch.
+
+The report originally never implemented three of the six planned pages
+(Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
+Recommendations) — the live report had 5 pages built around a different,
+DQ-focused scope instead. UAT has now closed that gap: the Gold-layer facts
+(`gld_fact_delivery_event`, `gld_fact_logistics_cost`,
+`gld_fact_disruption_event`), the semantic model measures behind them, and
+all three report pages are built and validated in UAT (see
+`CURRENT_STATUS.md` → "UAT module build-out"). While building **Transportation
+& Shipping**, a Silver DQ bug was found and fixed (delivery events other than
+`DELIVERED` were 100% quarantined) and validated with a fresh UAT batch.
+`dim_scenario` was not built as a physical dimension — no raw source exists
+for it anywhere in the pipeline — **Scenarios & Recommendations** instead
+uses two Power BI What-If Parameters (`Cost Savings Target %`, `OTIF
+Improvement Target %`) over the existing measures. **Network & Cost-to-Serve**
+is scoped to customer/carrier/route/region grain only, since no SKU-level
+cost-to-serve or facility/route utilization measure exists in Gold. All of
+this (the 5 Silver DQ fixes, the Gold Facts/Dimensions changes, the semantic
+model additions, and all three report pages) has since been **promoted to
+PROD and validated end-to-end** with two live batches (see
+`CURRENT_STATUS.md` → "PROD promotion" and "Gold Dimensions Lakehouse
+misattachment") — the 3 new Gold fact tables are populated in PROD, the DQ
+gate genuinely re-validates PROD's own data (a pre-existing binding bug was
+found and fixed along the way), and the new report pages render real data
+with no field errors. PROD's Silver/Gold tables have also been cleaned down
+to a single validated batch. The Phase 5 findings/screenshots write-up
+remains separate, later work.
+
+As before, do not resume billable Fabric capacity or run a capacity-consuming
+notebook/pipeline without confirming cost impact first.

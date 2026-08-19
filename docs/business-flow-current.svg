@@ -1,40 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
-  <title>Current supply chain business flow</title>
-  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#475569"/></marker></defs>
-  <rect width="1200" height="300" rx="18" fill="#f8fafc"/>
-  <text x="600" y="38" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#0f172a">Supply Chain Control Tower — Business Flow</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" role="img" aria-label="Supply chain control tower business flow: Planning, Orders, Fulfillment, Transport and Decisions run in sequence, and Decisions feeds back into Planning to close a continuous replanning loop.">
+  <title>Supply Chain Control Tower — Business Flow</title>
+  <desc>Five operating stages connected left to right by labeled handoffs (demand signal, order released, shipment ready, delivered), with a dashed feedback arrow from Decisions back to Planning labeled "monitor &amp; replan", showing this is a closed control loop rather than a one-way pipeline.</desc>
 
-  <g font-family="Arial" text-anchor="middle">
-    <rect x="65" y="100" width="190" height="150" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
-    <text x="160" y="140" font-size="16" font-weight="700" fill="#0C447C">Planning</text>
-    <text x="160" y="170" font-size="14" fill="#185FA5">Demand &amp;</text>
-    <text x="160" y="192" font-size="14" fill="#185FA5">inventory</text>
+  <defs>
+    <marker id="fwd" markerWidth="9" markerHeight="8" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+    <marker id="fb" markerWidth="9" markerHeight="8" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#534AB7"/>
+    </marker>
 
-    <rect x="285" y="100" width="190" height="150" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="2"/>
-    <text x="380" y="140" font-size="16" font-weight="700" fill="#27500A">Orders</text>
-    <text x="380" y="170" font-size="14" fill="#3B6D11">Purchase &amp;</text>
-    <text x="380" y="192" font-size="14" fill="#3B6D11">sales</text>
+    <g id="icoTrend"><polyline points="2,17 7,10 10,13 18,3" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="3" r="1.6"/></g>
+    <g id="icoDoc"><rect x="3" y="1" width="14" height="18" rx="1.5" fill="none" stroke-width="1.6"/><line x1="6" y1="6" x2="14" y2="6" stroke-width="1.4"/><line x1="6" y1="10" x2="14" y2="10" stroke-width="1.4"/><line x1="6" y1="14" x2="11" y2="14" stroke-width="1.4"/></g>
+    <g id="icoBox"><polyline points="2,6 10,2 18,6" fill="none" stroke-width="1.6" stroke-linejoin="round"/><rect x="2" y="6" width="16" height="12" fill="none" stroke-width="1.6"/><line x1="10" y1="6" x2="10" y2="18" stroke-width="1.4"/></g>
+    <g id="icoTruck"><rect x="1" y="7" width="11" height="7" rx="1" fill="none" stroke-width="1.5"/><path d="M12,10 h5 l2,3 v1 h-7 z" fill="none" stroke-width="1.5" stroke-linejoin="round"/><circle cx="6" cy="16" r="2"/><circle cx="16" cy="16" r="2"/></g>
+    <g id="icoTarget"><circle cx="10" cy="10" r="8" fill="none" stroke-width="1.6"/><circle cx="10" cy="10" r="5" fill="none" stroke-width="1.6"/><circle cx="10" cy="10" r="1.8"/></g>
+  </defs>
 
-    <rect x="505" y="100" width="190" height="150" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="2"/>
-    <text x="600" y="140" font-size="16" font-weight="700" fill="#633806">Fulfillment</text>
-    <text x="600" y="170" font-size="14" fill="#854F0B">Pick &amp;</text>
-    <text x="600" y="192" font-size="14" fill="#854F0B">pack</text>
+  <rect x="1" y="1" width="1198" height="338" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="600" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">Supply Chain Control Tower — Business Flow</text>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#64748b">One data model, five operating stages, closed by a continuous replanning loop</text>
 
-    <rect x="725" y="100" width="190" height="150" rx="10" fill="#FBEAF0" stroke="#993556" stroke-width="2"/>
-    <text x="820" y="140" font-size="16" font-weight="700" fill="#72243E">Transport</text>
-    <text x="820" y="170" font-size="14" fill="#993556">Ship &amp;</text>
-    <text x="820" y="192" font-size="14" fill="#993556">deliver</text>
+  <!-- Planning -->
+  <g font-family="Arial, sans-serif">
+    <rect x="48" y="88" width="160" height="130" rx="14" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+    <g fill="#0C447C" stroke="#0C447C"><use href="#icoTrend" x="64" y="102"/></g>
+    <text x="92" y="118" font-size="15" font-weight="700" fill="#0C447C">Planning</text>
+    <g font-size="11" fill="#185FA5">
+      <text x="66" y="146">Demand Forecast</text>
+      <text x="66" y="166">Inventory Snapshot</text>
+      <text x="66" y="186">Safety-stock risk</text>
+    </g>
 
-    <rect x="945" y="100" width="190" height="150" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="2"/>
-    <text x="1040" y="140" font-size="16" font-weight="700" fill="#3C3489">Decisions</text>
-    <text x="1040" y="170" font-size="14" fill="#534AB7">Cost, risk,</text>
-    <text x="1040" y="192" font-size="14" fill="#534AB7">scenarios</text>
+    <!-- Orders -->
+    <rect x="284" y="88" width="160" height="130" rx="14" fill="#EAF3DE" stroke="#3B6D11" stroke-width="2"/>
+    <g fill="#27500A" stroke="#27500A"><use href="#icoDoc" x="300" y="102"/></g>
+    <text x="328" y="118" font-size="15" font-weight="700" fill="#27500A">Orders</text>
+    <g font-size="11" fill="#3B6D11">
+      <text x="302" y="146">Sales Orders</text>
+      <text x="302" y="166">Purchase Orders</text>
+      <text x="302" y="186">Supplier risk</text>
+    </g>
+
+    <!-- Fulfillment -->
+    <rect x="520" y="88" width="160" height="130" rx="14" fill="#FAEEDA" stroke="#854F0B" stroke-width="2"/>
+    <g fill="#633806" stroke="#633806"><use href="#icoBox" x="536" y="102"/></g>
+    <text x="564" y="118" font-size="15" font-weight="700" fill="#633806">Fulfillment</text>
+    <g font-size="11" fill="#854F0B">
+      <text x="538" y="146">Pick &amp; Pack</text>
+      <text x="538" y="166">Warehouse capacity</text>
+      <text x="538" y="186">WMS activity events</text>
+    </g>
+
+    <!-- Transport -->
+    <rect x="756" y="88" width="160" height="130" rx="14" fill="#FBEAF0" stroke="#993556" stroke-width="2"/>
+    <g fill="#72243E" stroke="#72243E"><use href="#icoTruck" x="772" y="102"/></g>
+    <text x="800" y="118" font-size="15" font-weight="700" fill="#72243E">Transport</text>
+    <g font-size="11" fill="#993556">
+      <text x="774" y="146">Shipments &amp; Carriers</text>
+      <text x="774" y="166">Routes &amp; OTIF</text>
+      <text x="774" y="186">Delivery events</text>
+    </g>
+
+    <!-- Decisions -->
+    <rect x="992" y="88" width="160" height="130" rx="14" fill="#EEEDFE" stroke="#534AB7" stroke-width="2"/>
+    <g fill="#3C3489" stroke="#3C3489"><use href="#icoTarget" x="1008" y="102"/></g>
+    <text x="1036" y="118" font-size="15" font-weight="700" fill="#3C3489">Decisions</text>
+    <g font-size="11" fill="#534AB7">
+      <text x="1010" y="146">Cost-to-serve</text>
+      <text x="1010" y="166">Disruption impact</text>
+      <text x="1010" y="186">Scenario planning</text>
+    </g>
   </g>
 
-  <g stroke="#475569" stroke-width="3" marker-end="url(#a)">
-    <line x1="255" y1="175" x2="280" y2="175"/>
-    <line x1="475" y1="175" x2="500" y2="175"/>
-    <line x1="695" y1="175" x2="720" y2="175"/>
-    <line x1="915" y1="175" x2="940" y2="175"/>
+  <!-- forward flow -->
+  <g stroke="#475569" stroke-width="2.5" marker-end="url(#fwd)">
+    <line x1="210" y1="128" x2="282" y2="128"/>
+    <line x1="446" y1="128" x2="518" y2="128"/>
+    <line x1="682" y1="128" x2="754" y2="128"/>
+    <line x1="918" y1="128" x2="990" y2="128"/>
   </g>
+  <g font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">
+    <text x="246" y="120">demand signal</text>
+    <text x="482" y="120">order released</text>
+    <text x="718" y="120">shipment ready</text>
+    <text x="954" y="120">delivered</text>
+  </g>
+
+  <!-- feedback loop: Decisions informs the next Planning cycle -->
+  <path d="M 1072,220 C 1072,310 128,310 128,220" fill="none" stroke="#534AB7" stroke-width="2.5" stroke-dasharray="7,5" marker-end="url(#fb)"/>
+  <rect x="512" y="284" width="176" height="24" rx="12" fill="#f8fafc"/>
+  <text x="600" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-style="italic" fill="#534AB7">monitor results → replan</text>
 </svg>

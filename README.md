@@ -22,12 +22,18 @@ Latest validated checkpoints:
 
 - PROD batch: `sc-prod-volume-e2e-20260816-06`.
 - PROD pipeline job: `85ffed1a-ec34-469d-a64b-216f708a5993`.
-- UAT batch date: `2026/08/21`, ingestion watermark
-  `2026-08-21T06:00:00`.
-- UAT pipeline job: `114bb5c9-c84b-43ef-845d-f691a6b43b8d`.
+- UAT batch date: `2026/08/22`, ingestion watermark
+  `2026-08-22T06:00:00`.
+- UAT pipeline job: `f39f7830-0a9b-4b6e-97a9-c249a7c18561`.
 - UAT and PROD use the same DQ policy: row-volume movement is an operational
   warning; schema, duplicate keys, required nulls, and referential-integrity
   violations remain blocking checks.
+
+UAT is currently building out the three report modules
+(Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
+Recommendations) that were planned but never implemented. The Gold layer and
+semantic model additions behind them are validated; report pages are next.
+See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the detailed build log.
 
 ## Business purpose
 
@@ -103,6 +109,10 @@ field rules.
   model, and report conventions.
 - [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md) — source entities and quality
   contract.
+- [PORTFOLIO_FINDINGS.md](PORTFOLIO_FINDINGS.md) — business case, key
+  findings, and recommendations for a non-technical audience.
+- [LEARNING_PATH.md](LEARNING_PATH.md) — a self-contained curriculum built
+  from this project's own files and bugs, for a later teaching session.
 
 ## Main folders
 

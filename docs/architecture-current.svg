@@ -1,14 +1,122 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
-  <title>Current supply chain Fabric architecture</title>
-  <defs><marker id="b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#475569"/></marker></defs>
-  <rect width="1200" height="390" rx="18" fill="#f8fafc"/>
-  <text x="600" y="38" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#0f172a">Current Runtime Architecture</text>
-  <g font-family="Arial" font-size="15" text-anchor="middle">
-    <rect x="35" y="95" width="250" height="210" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="160" y="125" font-weight="700" fill="#1e3a8a">UAT</text><text x="160" y="160" fill="#1e3a8a">Local Python generator</text><text x="160" y="190" fill="#1e3a8a">Manual Bronze upload</text><text x="160" y="220" fill="#1e3a8a">SupplyChain-UAT</text><text x="160" y="250" fill="#1e3a8a">Incremental pipeline</text><text x="160" y="280" fill="#1e3a8a">Direct Lake → Report</text>
-    <rect x="335" y="95" width="210" height="210" rx="16" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="440" y="130" font-weight="700" fill="#14532d">OneLake Bronze</text><text x="440" y="170" fill="#14532d">18 linked entities</text><text x="440" y="205" fill="#14532d">Dated CSV partitions</text><text x="440" y="240" fill="#14532d">_READY marker for PROD</text>
-    <rect x="595" y="95" width="210" height="210" rx="16" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="700" y="130" font-weight="700" fill="#7c2d12">Fabric processing</text><text x="700" y="170" fill="#7c2d12">Silver conformance</text><text x="700" y="205" fill="#7c2d12">Gold dimensions/facts</text><text x="700" y="240" fill="#7c2d12">DQ + watermarks</text>
-    <rect x="855" y="95" width="310" height="210" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="1010" y="130" font-weight="700" fill="#4c1d95">PROD entry and consumption</text><text x="1010" y="170" fill="#4c1d95">Azure Function</text><text x="1010" y="205" fill="#4c1d95">SupplyChain-PROD</text><text x="1010" y="240" fill="#4c1d95">Semantic Model → Power BI</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" role="img" aria-label="Runtime architecture: UAT and PROD are two isolated pipelines, each running the same Bronze to Silver to Gold to Semantic Model to Report design, differing only in entry point and workspace bindings.">
+  <title>Current Runtime Architecture — UAT and PROD</title>
+  <desc>Two parallel lanes, UAT and PROD, each flowing Entry point → Bronze → Silver/Gold → Semantic Model → Report. A dashed boundary marks the Bronze through Semantic Model stages as running an identical transformation design, deployed independently in each environment's own workspace and lakehouse.</desc>
+
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="8" refX="7.5" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#475569"/></marker>
+
+    <g id="icoCode"><rect x="3" y="1" width="14" height="18" rx="1.5" fill="none" stroke-width="1.6"/><line x1="6" y1="6" x2="14" y2="6" stroke-width="1.4"/><line x1="6" y1="10" x2="14" y2="10" stroke-width="1.4"/><line x1="6" y1="14" x2="11" y2="14" stroke-width="1.4"/></g>
+    <g id="icoBolt"><polygon points="11,1 3,12 9,12 8,19 17,7 11,7" fill="none" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="icoCyl"><ellipse cx="10" cy="5" rx="8" ry="3.2" fill="none" stroke-width="1.6"/><line x1="2" y1="5" x2="2" y2="15" stroke-width="1.6"/><line x1="18" y1="5" x2="18" y2="15" stroke-width="1.6"/><path d="M2,15 A8,3.2 0 0 0 18,15" fill="none" stroke-width="1.6"/></g>
+    <g id="icoFunnel"><polygon points="2,3 18,3 11,13 11,18 9,18 9,13" fill="none" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="icoGrid"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="11" y="2" width="7" height="7" rx="1"/><rect x="2" y="11" width="7" height="7" rx="1"/><rect x="11" y="11" width="7" height="7" rx="1"/></g>
+    <g id="icoBars"><rect x="2" y="12" width="4" height="7"/><rect x="8" y="7" width="4" height="12"/><rect x="14" y="2" width="4" height="17"/></g>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="438" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="600" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">Current Runtime Architecture</text>
+  <text x="600" y="54" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#64748b">Same transformation design, run independently per environment</text>
+
+  <!-- shared-contract boundary, drawn first so lane boxes sit on its edge -->
+  <rect x="255" y="70" width="700" height="332" rx="18" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,5"/>
+
+  <!-- ===== UAT lane ===== -->
+  <rect x="45" y="56" width="54" height="20" rx="10" fill="#2563eb"/>
+  <text x="72" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">UAT</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="45" y="80" width="170" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <g fill="#1e3a8a" stroke="#1e3a8a"><use href="#icoCode" x="59" y="94"/></g>
+    <text x="87" y="110" font-size="13.5" font-weight="700" fill="#1e3a8a">Local Generator</text>
+    <text x="59" y="132" font-size="10.5" fill="#1e3a8a">generate_incremental_</text>
+    <text x="59" y="147" font-size="10.5" fill="#1e3a8a">batch.py</text>
+
+    <rect x="280" y="80" width="170" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <g fill="#14532d" stroke="#14532d"><use href="#icoCyl" x="294" y="94"/></g>
+    <text x="322" y="110" font-size="13.5" font-weight="700" fill="#14532d">Bronze</text>
+    <text x="294" y="132" font-size="10.5" fill="#14532d">lh_supply_chain_UAT</text>
+    <text x="294" y="147" font-size="10.5" fill="#14532d">18 entities</text>
+
+    <rect x="515" y="80" width="170" height="100" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <g fill="#7c2d12" stroke="#7c2d12"><use href="#icoFunnel" x="529" y="94"/></g>
+    <text x="557" y="110" font-size="13.5" font-weight="700" fill="#7c2d12">Silver → Gold</text>
+    <text x="529" y="132" font-size="10.5" fill="#7c2d12">7-stage notebooks</text>
+    <text x="529" y="147" font-size="10.5" fill="#7c2d12">manual pipeline run</text>
+
+    <rect x="750" y="80" width="170" height="100" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <g fill="#4c1d95" stroke="#4c1d95"><use href="#icoGrid" x="764" y="94"/></g>
+    <text x="792" y="110" font-size="13.5" font-weight="700" fill="#4c1d95">Semantic Model</text>
+    <text x="764" y="132" font-size="10.5" fill="#4c1d95">Direct Lake</text>
+    <text x="764" y="147" font-size="10.5" fill="#4c1d95">SupplyChain-UAT</text>
+
+    <rect x="985" y="80" width="170" height="100" rx="12" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+    <g fill="#831843" stroke="#831843"><use href="#icoBars" x="999" y="94"/></g>
+    <text x="1027" y="110" font-size="13.5" font-weight="700" fill="#831843">Power BI Report</text>
+    <text x="999" y="132" font-size="10.5" fill="#831843">6-page control</text>
+    <text x="999" y="147" font-size="10.5" fill="#831843">tower</text>
   </g>
-  <g stroke="#475569" stroke-width="3" marker-end="url(#b)"><line x1="285" y1="200" x2="330" y2="200"/><line x1="545" y1="200" x2="590" y2="200"/><line x1="805" y1="200" x2="850" y2="200"/></g>
-  <text x="600" y="355" text-anchor="middle" font-family="Arial" font-size="14" fill="#475569">UAT and PROD share the contract and transformation design; entry points and bindings remain isolated.</text>
+
+  <g stroke="#475569" stroke-width="2.5" marker-end="url(#a)">
+    <line x1="217" y1="130" x2="278" y2="130"/>
+    <line x1="452" y1="130" x2="513" y2="130"/>
+    <line x1="687" y1="130" x2="748" y2="130"/>
+    <line x1="922" y1="130" x2="983" y2="130"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">
+    <text x="247" y="122">upload</text>
+    <text x="482" y="122">manual run</text>
+    <text x="717" y="122">refresh</text>
+    <text x="952" y="122">Direct Lake</text>
+  </g>
+
+  <!-- ===== PROD lane ===== -->
+  <rect x="45" y="271" width="54" height="20" rx="10" fill="#7c3aed"/>
+  <text x="72" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">PROD</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="45" y="295" width="170" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <g fill="#1e3a8a" stroke="#1e3a8a"><use href="#icoBolt" x="59" y="309"/></g>
+    <text x="87" y="325" font-size="13.5" font-weight="700" fill="#1e3a8a">Azure Function</text>
+    <text x="59" y="347" font-size="10.5" fill="#1e3a8a">func-sc-event-</text>
+    <text x="59" y="362" font-size="10.5" fill="#1e3a8a">PROD-0812</text>
+
+    <rect x="280" y="295" width="170" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <g fill="#14532d" stroke="#14532d"><use href="#icoCyl" x="294" y="309"/></g>
+    <text x="322" y="325" font-size="13.5" font-weight="700" fill="#14532d">Bronze</text>
+    <text x="294" y="347" font-size="10.5" fill="#14532d">lh_supply_chain_PROD</text>
+    <text x="294" y="362" font-size="10.5" fill="#14532d">18 entities</text>
+
+    <rect x="515" y="295" width="170" height="100" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <g fill="#7c2d12" stroke="#7c2d12"><use href="#icoFunnel" x="529" y="309"/></g>
+    <text x="557" y="325" font-size="13.5" font-weight="700" fill="#7c2d12">Silver → Gold</text>
+    <text x="529" y="347" font-size="10.5" fill="#7c2d12">7-stage notebooks</text>
+    <text x="529" y="362" font-size="10.5" fill="#7c2d12">auto-triggered</text>
+
+    <rect x="750" y="295" width="170" height="100" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <g fill="#4c1d95" stroke="#4c1d95"><use href="#icoGrid" x="764" y="309"/></g>
+    <text x="792" y="325" font-size="13.5" font-weight="700" fill="#4c1d95">Semantic Model</text>
+    <text x="764" y="347" font-size="10.5" fill="#4c1d95">Direct Lake</text>
+    <text x="764" y="362" font-size="10.5" fill="#4c1d95">SupplyChain-PROD</text>
+
+    <rect x="985" y="295" width="170" height="100" rx="12" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+    <g fill="#831843" stroke="#831843"><use href="#icoBars" x="999" y="309"/></g>
+    <text x="1027" y="325" font-size="13.5" font-weight="700" fill="#831843">Power BI Report</text>
+    <text x="999" y="347" font-size="10.5" fill="#831843">same page</text>
+    <text x="999" y="362" font-size="10.5" fill="#831843">design</text>
+  </g>
+
+  <g stroke="#475569" stroke-width="2.5" marker-end="url(#a)">
+    <line x1="217" y1="345" x2="278" y2="345"/>
+    <line x1="452" y1="345" x2="513" y2="345"/>
+    <line x1="687" y1="345" x2="748" y2="345"/>
+    <line x1="922" y1="345" x2="983" y2="345"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="10" fill="#475569" text-anchor="middle">
+    <text x="247" y="337">HTTP write</text>
+    <text x="482" y="337">auto-run</text>
+    <text x="717" y="337">refresh</text>
+    <text x="952" y="337">Direct Lake</text>
+  </g>
+
+  <text x="600" y="424" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" fill="#475569">UAT and PROD run the identical Bronze → Silver → Gold → Semantic Model design end-to-end; only the entry point and workspace bindings are isolated.</text>
 </svg>
