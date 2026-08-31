@@ -138,6 +138,12 @@ Warehouse, inventory, and transportation costs
 
 ## 7. Canonical data model
 
+> As built (see `CURRENT_STATUS.md` / `TECHNICAL_REFERENCE.md`): 7 physical
+> Gold dimensions and 8 Gold facts. `dim_scenario` was not built — there is
+> no scenario source data — and Scenarios & Recommendations uses Power BI
+> What-If Parameters instead. `fact_wms_activity` was not built either;
+> `wms_activity_events` stops at Silver (`slv_wms_activity_event`).
+
 ### Dimensions
 
 - `dim_date`
@@ -147,7 +153,7 @@ Warehouse, inventory, and transportation costs
 - `dim_location`
 - `dim_carrier`
 - `dim_route`
-- `dim_scenario`
+- `dim_scenario` — *not built (What-If Parameters instead)*
 
 ### Facts
 
@@ -155,7 +161,7 @@ Warehouse, inventory, and transportation costs
 - `fact_sales_order_line`
 - `fact_inventory_snapshot`
 - `fact_purchase_order_receipt`
-- `fact_wms_activity`
+- `fact_wms_activity` — *not built (stops at Silver)*
 - `fact_shipment`
 - `fact_delivery_event`
 - `fact_logistics_cost`
@@ -350,7 +356,9 @@ See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the validated checkpoints and
 The report originally never implemented three of the six planned pages
 (Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
 Recommendations) — the live report had 5 pages built around a different,
-DQ-focused scope instead. UAT has now closed that gap: the Gold-layer facts
+DQ-focused scope instead (Executive Overview, Sales & Demand, Inventory &
+Fulfillment, Data Quality Dashboard, Data Health). UAT has now closed that
+gap, bringing the live report to 8 pages: the Gold-layer facts
 (`gld_fact_delivery_event`, `gld_fact_logistics_cost`,
 `gld_fact_disruption_event`), the semantic model measures behind them, and
 all three report pages are built and validated in UAT (see

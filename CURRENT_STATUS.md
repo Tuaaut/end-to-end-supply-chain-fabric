@@ -2,15 +2,20 @@
 
 Last updated: 2026-08-19 (Bangkok)
 
+> Batch dates below (e.g. `2026/08/26`) are the generator's *simulated*
+> business dates (`--date`), not the calendar date the run happened —
+> synthetic batches are routinely forward-dated. The `Last updated` stamp
+> above is the real date.
+
 ## At a glance
 
 - UAT and PROD are both validated end-to-end. Schedules and event triggers
   are **disabled** — the project is in a stable, manual-validation state.
-- All 6 originally-planned report pages exist and are validated (5
-  pre-existing pages — Executive Overview, Sales & Demand, Inventory &
-  Fulfillment, Data Quality Dashboard, Data Health — plus the 3 newly built:
-  Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
-  Recommendations; 8 pages live in total).
+- The live report has **8 pages** in both UAT and PROD: 5 pre-existing —
+  Executive Overview, Sales & Demand, Inventory & Fulfillment, Data Quality
+  Dashboard, Data Health — plus the 3 newly built this phase: Transportation
+  & Shipping, Network & Cost-to-Serve, Scenarios & Recommendations. Every
+  page from the original 6-page plan now has a live equivalent.
 - The 5 Silver DQ fixes, 3 new Gold facts, semantic model additions, and 3
   new report pages have all been **promoted from UAT to PROD** and
   validated with live batches.
@@ -22,8 +27,9 @@ Last updated: 2026-08-19 (Bangkok)
   batch (`sc-prod-promo-validate-20260818-02`).
 - **2026-08-19:** fixed a cosmetic DQ gate bug (wrong column read for the
   "N failed checks" message) on both UAT and PROD, and reprocessed UAT's
-  historical `slv_delivery_event` backlog (~1,563 rows wrongly quarantined
-  by a since-fixed rule, now VALID and in Gold) — see the fixes log below.
+  historical `slv_delivery_event` backlog (~3,150 `PICKED_UP` / `IN_TRANSIT`
+  rows wrongly quarantined by a since-fixed rule, now VALID and in Gold) —
+  see the fixes log below.
 
 ## Pipeline flow
 
@@ -61,8 +67,8 @@ each has its own workspace, Lakehouse, and pipeline.
 | Pipeline | `pl_supply_chain_incremental_UAT` | `pl_supply_chain_event_PROD` |
 | Entry point | Local generator, manual Bronze upload | Azure Function (`func-sc-event-PROD-0812`), direct OneLake write |
 | Azure Function | Not used | Enabled, route `/api/generate-batch` |
-| Latest validated batch | `2026/08/25` (watermark `2026-08-25T06:00:00`) | `sc-prod-promo-validate-20260818-02` |
-| Latest pipeline job | `77d9ba26-79e3-499b-981c-564ce174968a` | `a6bedeed-bed1-4585-8c07-f30f978faf86` |
+| Latest validated batch | `2026/08/26` (watermark `2026-08-26T06:00:00`) | `sc-prod-promo-validate-20260818-02` |
+| Latest pipeline job | `75841ed0-baba-41e6-9c32-1152b47bafc0` | `a6bedeed-bed1-4585-8c07-f30f978faf86` |
 | Volume profile | — | ~1,600 orders / ~4,800 order lines per batch |
 | Schedule / trigger | Disabled | Disabled |
 
@@ -88,17 +94,24 @@ UAT and PROD. See the appendix for full visual inventories.
 | 2026-08-18 | PROD Gold Dimensions | Notebook bound to **UAT's** Lakehouse — PROD's DQ gate silently never validated real PROD data | Fixed `dependencies.lakehouse` metadata, reverified with a live batch |
 | 2026-08-18 | Semantic model (both) | What-If parameter `sourceColumn` used the display name instead of `GENERATESERIES`' actual `Value` column — silently discarded on import | Set `sourceColumn: [Value]` |
 | 2026-08-19 | Gold Dimensions (UAT+PROD) | DQ gate's `dq_score` / "N failed checks" message read the `severity` column instead of `status` | Changed `row[5]` → `row[6]`, pushed & verified both environments |
-| 2026-08-19 | UAT Silver historical backlog | ~1,563 `slv_delivery_event` rows (`PICKED_UP`/`IN_TRANSIT`) stayed quarantined after the `proof_of_delivery_flag` code fix — a code fix doesn't reprocess rows already quarantined under the old rule | One-time backfill UPDATE on `slv_delivery_event` + direct re-merge into `gld_fact_delivery_event`; UAT only |
+| 2026-08-19 | UAT Silver historical backlog | ~3,150 `slv_delivery_event` rows (`PICKED_UP`/`IN_TRANSIT`) stayed quarantined after the `proof_of_delivery_flag` code fix — a code fix doesn't reprocess rows already quarantined under the old rule | One-time backfill UPDATE on `slv_delivery_event` + direct re-merge into `gld_fact_delivery_event`; UAT only |
 
 Full root-cause narratives for each of these are in the appendix.
 
 ## Known gaps
 
-- **Phase 5** (findings write-up / screenshots for the portfolio) — not
-  started.
+- **Phase 5** (portfolio publish) — partially done. `PORTFOLIO_FINDINGS.md`
+  (business case, five DQ findings, limitations, recommendations) and the
+  8-page report PDF under `docs/screenshots/` exist; the architecture and
+  business-flow diagrams are current. Still outstanding: inline report
+  screenshots in `README.md` and a final focused QA pass before publishing.
 - The 2026-08-19 DQ gate fix hasn't been validated against a live batch
   with real `FAIL` rows yet — spot-check the next batch's `dq_score`
   message against `ops_data_quality_summary`'s actual `status` counts.
+- The 2026-08-19 delivery-event backlog reprocess and DQ-score `row[6]` fix
+  were applied after the last full pipeline batch (`2026/08/26`) — UAT via a
+  one-off notebook, both envs via export/import — so they are not yet
+  covered by an end-to-end pipeline run.
 
 ## Quality and modeling contract
 
@@ -450,12 +463,13 @@ running the pipeline (job `77d9ba26-79e3-499b-981c-564ce174968a`, ~19
 minutes, `Completed`). Confirmed via DAX against
 `gld_fact_delivery_event[Event Type]`: `DELIVERED` 1,563, `PICKED_UP` 1,
 `IN_TRANSIT` 1 — the new event types now flow through to Gold. The
-historical 1,563-row backlog was not retroactively reprocessed at the time —
-this was fixed on 2026-08-19, see "Historical backlog reprocess" below.
+historical ~3,150-row `PICKED_UP`/`IN_TRANSIT` backlog was not retroactively
+reprocessed at the time — this was fixed on 2026-08-19, see "Historical
+backlog reprocess" below.
 
 **DQ rule review (full pipeline)** — after the `proof_of_delivery_flag` fix,
 did a complete review of every Silver quarantine rule and Gold gate check
-across all 17 Silver tables, looking for the same failure pattern (a
+across all 18 Silver tables, looking for the same failure pattern (a
 required-field check applied to a column that's legitimately blank for some
 record types). Gold's own gate design (`DQ_TABLE_RULES`/
 `DQ_REFERENTIAL_RULES`, blocking on schema/duplicate-key/required-null/orphan-FK)
@@ -597,7 +611,7 @@ The `proof_of_delivery_flag` code fix (see "Silver DQ fix" above) only
 protects *new* incremental rows — a code change doesn't retroactively
 reprocess rows that were already quarantined under the old rule, since
 Silver MERGE only touches rows newer than the stored watermark. The
-~1,563-row `PICKED_UP`/`IN_TRANSIT` backlog quarantined before the fix
+~3,150-row `PICKED_UP`/`IN_TRANSIT` backlog quarantined before the fix
 stayed quarantined indefinitely.
 
 Rather than resetting the Silver watermark or dropping/rebuilding tables to

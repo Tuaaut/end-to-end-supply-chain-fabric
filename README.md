@@ -18,22 +18,21 @@ Schedules and event triggers remain disabled. Runs are manual and controlled.
 The current UAT and PROD paths are intentionally separate at their entry point,
 while the transformation design and data contracts remain aligned.
 
-Latest validated checkpoints:
+The three report modules that were planned but never built — Transportation &
+Shipping, Network & Cost-to-Serve, and Scenarios & Recommendations — have
+since been built, promoted from UAT to PROD, and validated end-to-end with
+live batches, together with the three Gold facts and the semantic-model
+additions behind them. The live report now has 8 pages in both environments.
+Phase 5 (portfolio publish) is partially done —
+[PORTFOLIO_FINDINGS.md](PORTFOLIO_FINDINGS.md) and the exported report PDF
+exist; inline README screenshots and a final QA pass are still outstanding.
 
-- PROD batch: `sc-prod-volume-e2e-20260816-06`.
-- PROD pipeline job: `85ffed1a-ec34-469d-a64b-216f708a5993`.
-- UAT batch date: `2026/08/22`, ingestion watermark
-  `2026-08-22T06:00:00`.
-- UAT pipeline job: `f39f7830-0a9b-4b6e-97a9-c249a7c18561`.
-- UAT and PROD use the same DQ policy: row-volume movement is an operational
-  warning; schema, duplicate keys, required nulls, and referential-integrity
-  violations remain blocking checks.
+UAT and PROD use the same DQ policy: a row-count decrease greater than 30% is
+an operational warning; schema, duplicate keys, required nulls, and
+referential-integrity violations remain blocking checks.
 
-UAT is currently building out the three report modules
-(Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
-Recommendations) that were planned but never implemented. The Gold layer and
-semantic model additions behind them are validated; report pages are next.
-See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the detailed build log.
+See [CURRENT_STATUS.md](CURRENT_STATUS.md) for the authoritative live state —
+the current validated batch IDs, pipeline job IDs, and the full build log.
 
 ## Business purpose
 
@@ -48,9 +47,9 @@ The core business question is: how should the company balance customer service,
 inventory, capacity, transportation performance, supply-chain risk, and total
 logistics cost?
 
-The report is organized around Executive Control Tower, Demand and Inventory,
-Warehouse and Fulfillment, Transportation and Shipping, Network and
-Cost-to-Serve, and Scenarios and Recommendations.
+The live report has 8 pages: Executive Overview, Sales & Demand, Inventory &
+Fulfillment, Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
+Recommendations, Data Quality Dashboard, and Data Health.
 
 ![Current business flow](docs/business-flow-current.svg)
 
@@ -79,9 +78,10 @@ is required.
 
 ## Data and quality contract
 
-The Bronze layer contains 18 linked source entities. Silver normalizes keys,
-timestamps, statuses, units, currencies, and duplicates, then records
-`dq_status` and watermarks. Gold reads `VALID` Silver rows.
+The Bronze layer contains 18 linked source entities, conformed 1:1 into 18
+Silver tables. Silver normalizes keys, timestamps, statuses, units,
+currencies, and duplicates, then records `dq_status` and watermarks. Gold
+reads `VALID` Silver rows into 7 dimensions and 8 fact tables.
 
 Required invariants:
 
@@ -91,10 +91,10 @@ Required invariants:
 - date dimensions cover all relevant Silver fact dates;
 - duplicate business keys, required nulls, schema violations, and orphan foreign
   keys block Gold;
-- row-volume changes over 30% are recorded as warnings and become the next
-  accepted baseline after the run.
+- a row-count decrease greater than 30% is recorded as a warning and becomes
+  the next accepted baseline after the run.
 
-See [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md) for entity grain and raw
+See [DATA_CONTRACT.md](DATA_CONTRACT.md) for entity grain and raw
 field rules.
 
 ## Repository guide
@@ -107,7 +107,7 @@ field rules.
   architecture responsibilities.
 - [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) — notebooks, DQ, semantic
   model, and report conventions.
-- [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md) — source entities and quality
+- [DATA_CONTRACT.md](DATA_CONTRACT.md) — source entities and quality
   contract.
 - [PORTFOLIO_FINDINGS.md](PORTFOLIO_FINDINGS.md) — business case, key
   findings, and recommendations for a non-technical audience.
@@ -125,13 +125,21 @@ field rules.
 
 ## Quick start
 
-Generate and validate a local batch before a UAT run:
+Structural sanity check on a full local dataset (generator and validator are a
+matched pair, both defaulting to `data/raw/dev`):
+
+```bash
+python3 src/generate_supply_chain_data.py --profile dev --output data/raw/dev
+python3 src/validate_generated_data.py data/raw/dev
+```
+
+Generate a dated incremental batch for a UAT run (partitioned Bronze layout
+under `data/bronze_batches`; validate its manifest and CSVs per OPERATIONS.md):
 
 ```bash
 python3 src/generate_incremental_batch.py --date YYYY/MM/DD \
   --source-updated-at YYYY-MM-DDTHH:MM:SS --change-set \
   --output data/bronze_batches
-python3 src/validate_generated_data.py data/raw/dev
 ```
 
 For deployment or live execution, follow [OPERATIONS.md](OPERATIONS.md).

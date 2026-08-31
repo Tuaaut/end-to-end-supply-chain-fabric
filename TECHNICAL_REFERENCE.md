@@ -16,7 +16,7 @@ UAT items carry the `_UAT` suffix in Fabric. PROD uses the event-driven
 pipeline with environment-specific bindings. Semantic Model refresh follows
 Gold Facts.
 
-`nb_incremental_gold_facts` now writes nine Gold facts, not five:
+`nb_incremental_gold_facts` now writes eight Gold facts, not five:
 `gld_fact_demand_forecast`, `gld_fact_inventory_snapshot`,
 `gld_fact_purchase_receipt`, `gld_fact_sales_order_line`, `gld_fact_shipment`,
 plus `gld_fact_delivery_event`, `gld_fact_logistics_cost`, and
@@ -26,6 +26,12 @@ inputs for the last three (`slv_delivery_event`, `slv_logistics_cost`,
 `slv_disruption`) already existed in Silver — they were simply never
 registered in Gold's `DQ_TABLE_RULES` or written by Gold Facts. See
 `CURRENT_STATUS.md` for the DQ-rule design decisions behind that change.
+
+The `PROJECT_PLAN.md` canonical model also lists a ninth fact,
+`fact_wms_activity`. It was never built: `wms_activity_events` is conformed
+into Silver as `slv_wms_activity_event` but is not promoted to a Gold fact
+and has no measures in the semantic model. So the as-built shape is:
+18 Bronze entities → 18 Silver tables → 7 Gold dimensions + 8 Gold facts.
 
 ## Incremental processing
 
