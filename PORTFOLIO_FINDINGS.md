@@ -50,7 +50,9 @@ that can be checked, tested, and audited.
 | **Data Quality Dashboard** | Historical DQ Score trend (48.5 as of the last batch) reflects the *pre-fix* scoring bug (#5) — the score itself was undercounting; the underlying gate logic was never wrong. Next batch will report a corrected score. |
 
 A full 8-page PDF export of the live report (all pages, current filter/slicer
-state) is at [docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf](docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf).
+state) is at [docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf](docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf),
+with per-page PNGs alongside it in [docs/screenshots/](docs/screenshots/)
+(three are embedded in the [README](README.md#report-snapshot)).
 
 ## Limitations
 

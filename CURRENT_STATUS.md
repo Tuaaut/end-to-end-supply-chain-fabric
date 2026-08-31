@@ -100,11 +100,11 @@ Full root-cause narratives for each of these are in the appendix.
 
 ## Known gaps
 
-- **Phase 5** (portfolio publish) — partially done. `PORTFOLIO_FINDINGS.md`
-  (business case, five DQ findings, limitations, recommendations) and the
-  8-page report PDF under `docs/screenshots/` exist; the architecture and
-  business-flow diagrams are current. Still outstanding: inline report
-  screenshots in `README.md` and a final focused QA pass before publishing.
+- **Phase 5** (portfolio publish) — nearly done. `PORTFOLIO_FINDINGS.md`
+  (business case, five DQ findings, limitations, recommendations), the 8-page
+  report PDF plus per-page PNGs under `docs/screenshots/` (embedded in
+  `README.md`), and the architecture / business-flow diagrams are all in
+  place. Still outstanding: a final focused QA pass before publishing.
 - The 2026-08-19 DQ gate fix hasn't been validated against a live batch
   with real `FAIL` rows yet — spot-check the next batch's `dq_score`
   message against `ops_data_quality_summary`'s actual `status` counts.

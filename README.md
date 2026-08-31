@@ -23,9 +23,10 @@ Shipping, Network & Cost-to-Serve, and Scenarios & Recommendations — have
 since been built, promoted from UAT to PROD, and validated end-to-end with
 live batches, together with the three Gold facts and the semantic-model
 additions behind them. The live report now has 8 pages in both environments.
-Phase 5 (portfolio publish) is partially done —
-[PORTFOLIO_FINDINGS.md](PORTFOLIO_FINDINGS.md) and the exported report PDF
-exist; inline README screenshots and a final QA pass are still outstanding.
+Phase 5 (portfolio publish) is nearly done —
+[PORTFOLIO_FINDINGS.md](PORTFOLIO_FINDINGS.md), the exported report PDF, and
+inline report screenshots (below) are in place; a final QA pass is the last
+step outstanding.
 
 UAT and PROD use the same DQ policy: a row-count decrease greater than 30% is
 an operational warning; schema, duplicate keys, required nulls, and
@@ -50,6 +51,21 @@ logistics cost?
 The live report has 8 pages: Executive Overview, Sales & Demand, Inventory &
 Fulfillment, Transportation & Shipping, Network & Cost-to-Serve, Scenarios &
 Recommendations, Data Quality Dashboard, and Data Health.
+
+### Report snapshot
+
+Captured from the live UAT report on 2026-08-19. Full 8-page export:
+[docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf](docs/screenshots/rpt_supply_chain_UAT-2026-08-19.pdf);
+individual page PNGs are under [docs/screenshots/](docs/screenshots/). Figures
+come from mechanical validation batches (near-fixed relative timestamps), so
+service metrics such as OTIF % look artificially uniform — a data-generation
+artifact, not a pipeline result.
+
+![Executive Overview](docs/screenshots/01-executive-overview.png)
+
+![Transportation & Shipping](docs/screenshots/04-transportation-and-shipping.png)
+
+![Scenarios & Recommendations](docs/screenshots/06-scenarios-and-recommendations.png)
 
 ![Current business flow](docs/business-flow-current.svg)
 

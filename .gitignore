@@ -46,6 +46,8 @@ azure_function/event_driven/reference/
 *.gif
 *.webp
 dq_final.png
+# ...but keep the published report snapshots referenced by README/docs
+!docs/screenshots/*.png
 
 # Draft or scratch notes
 *draft*
